@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZenHR Clone - High Fidelity Demo</title>
+    <title>LTS AI Operations - High Fidelity Demo</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -15,7 +15,7 @@
             --bg-sidebar-active: #34495e;
             --text-sidebar: #ecf0f1;
             --primary: #2980b9; /* Corporate Blue */
-            --primary-hover: #1abc9c; /* Slight nod to ZenHR Teal for accents */
+            --primary-hover: #1abc9c; /* Teal Accent */
             --text-main: #333;
             --text-muted: #777;
             --border: #e0e0e0;
@@ -23,6 +23,7 @@
             --success: #27ae60;
             --warning: #f39c12;
             --danger: #c0392b;
+            --info: #8e44ad;
         }
 
         /* RTL Support Variables */
@@ -50,7 +51,7 @@
             display: flex;
             align-items: center;
             padding: 0 20px;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
@@ -58,8 +59,9 @@
         .logo-area i { margin-right: 10px; color: var(--primary-hover); }
         html[dir="rtl"] .logo-area i { margin-right: 0; margin-left: 10px; }
 
-        .nav-links { list-style: none; padding: 20px 0; flex-grow: 1; overflow-y: auto; }
-        .nav-item { padding: 12px 20px; display: flex; align-items: center; cursor: pointer; transition: 0.2s; color: #bdc3c7; }
+        .nav-links { list-style: none; padding: 10px 0; flex-grow: 1; overflow-y: auto; }
+        .nav-header { padding: 15px 20px 5px 20px; font-size: 0.75rem; text-transform: uppercase; color: #7f8c8d; font-weight: 600; letter-spacing: 1px; }
+        .nav-item { padding: 12px 20px; display: flex; align-items: center; cursor: pointer; transition: 0.2s; color: #bdc3c7; font-size: 0.9rem; }
         .nav-item:hover, .nav-item.active { background-color: var(--bg-sidebar-active); color: #fff; border-left: 4px solid var(--primary-hover); }
         html[dir="rtl"] .nav-item:hover, html[dir="rtl"] .nav-item.active { border-left: none; border-right: 4px solid var(--primary-hover); }
         
@@ -87,7 +89,6 @@
 
         .header-left { display: flex; align-items: center; gap: 15px; }
 
-        /* Header Right Side Container */
         .header-right { display: flex; align-items: center; gap: 20px; }
 
         /* Logo Container in Top Right */
@@ -136,35 +137,35 @@
             padding: 20px;
             box-shadow: var(--card-shadow);
             border: 1px solid var(--border);
+            position: relative;
         }
 
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .card-title { font-weight: 600; color: var(--text-main); font-size: 1rem; }
+        .card-title { font-weight: 600; color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px; }
         .card-action { color: var(--primary); font-size: 0.85rem; cursor: pointer; text-decoration: none; }
 
-        /* Specific Widgets Styles */
-        .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
-        .stat-value { font-weight: 700; font-size: 1.2rem; }
+        /* Widget Visuals */
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 12px; align-items: center; }
+        .stat-value { font-weight: 700; font-size: 1.1rem; }
         .stat-label { font-size: 0.85rem; color: var(--text-muted); }
 
-        .attendance-box { text-align: center; padding: 20px 0; }
-        .clock-time { font-size: 2rem; font-weight: 700; color: var(--primary-hover); margin: 10px 0; }
-        .btn-clock { background: var(--primary); color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 600; }
+        .btn-primary { background-color: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; transition: 0.2s; }
+        .btn-primary:hover { background-color: #21618c; }
         
-        .list-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
-        .list-item:last-child { border-bottom: none; }
-        .avatar-small { width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 0.8rem; font-weight: bold; color: #555; }
-        html[dir="rtl"] .avatar-small { margin-right: 0; margin-left: 15px; }
-        .item-details { flex-grow: 1; }
-        .item-title { font-size: 0.95rem; font-weight: 500; }
-        .item-subtitle { font-size: 0.8rem; color: var(--text-muted); }
-        .status-tag { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
-        .status-pending { background: #fff3cd; color: #856404; }
-        .status-approved { background: #d4edda; color: #155724; }
+        .btn-connect { background-color: var(--text-main); color: white; width: 100%; border: none; padding: 10px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 500; }
+        .btn-connect:hover { opacity: 0.9; }
 
-        /* Button Styles */
-        .btn-primary { background-color: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
         .btn-outline { background-color: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+
+        /* WFM Indicators */
+        .progress-bar { height: 8px; background: #eee; border-radius: 4px; overflow: hidden; margin-top: 5px; }
+        .progress-fill { height: 100%; background: var(--success); border-radius: 4px; }
+        
+        /* Agent Status */
+        .agent-status { display: flex; align-items: center; gap: 10px; padding: 10px; background: #f8f9fa; border-radius: 6px; margin-bottom: 10px; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #ccc; }
+        .status-dot.online { background: var(--success); box-shadow: 0 0 5px var(--success); }
+        .status-dot.busy { background: var(--danger); }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -172,8 +173,7 @@
             .sidebar.active { left: 0; }
             html[dir="rtl"] .sidebar { left: auto; right: -260px; }
             html[dir="rtl"] .sidebar.active { right: 0; }
-            .top-header { padding: 0 15px; }
-            .branding-logos { display: none; } /* Hide extra logos on mobile to save space */
+            .branding-logos { display: none; }
         }
     </style>
 </head>
@@ -181,11 +181,11 @@
 
     <nav class="sidebar" id="sidebar">
         <div class="logo-area">
-            <i class="fa-solid fa-leaf"></i>
-            <span>ZenHR</span>
+            <i class="fa-solid fa-layer-group"></i>
+            <span>LTS AI Ops</span>
         </div>
-        <ul class="nav-links" id="nav-links">
-            </ul>
+        <div id="nav-container">
+            </div>
     </nav>
 
     <div class="main-content">
@@ -198,13 +198,13 @@
             <div class="header-right">
                 <div class="user-controls">
                     <select id="role-select" class="btn-outline" onchange="changeRole()">
-                        <option value="admin">HR Admin</option>
-                        <option value="employee">Employee</option>
+                        <option value="admin">Admin</option>
+                        <option value="employee">Agent</option>
                     </select>
 
                     <button class="btn-outline" onclick="toggleLang()" id="lang-btn">عربي</button>
                     
-                    <i class="fa-regular fa-bell icon-btn"><span class="badge">3</span></i>
+                    <i class="fa-regular fa-bell icon-btn"><span class="badge">5</span></i>
                     
                     <div class="dropdown">
                         <img src="https://ui-avatars.com/api/?name=Admin+User&background=2980b9&color=fff" alt="User" id="user-avatar">
@@ -227,132 +227,159 @@
         // --- DATA & CONFIG ---
         
         const state = {
-            role: 'admin', // 'admin' or 'employee'
-            lang: 'en'     // 'en' or 'ar'
+            role: 'admin', 
+            lang: 'en'     
         };
 
-        // Text Dictionary for Localization
+        // Translations
         const i18n = {
             en: {
+                welcome: "Dashboard Overview",
+                roleAdmin: "System Admin",
+                roleEmp: "Agent",
+                
+                // Sidebar Sections
+                sec_core: "AI Modules",
+                sec_ops: "Operations",
+                sec_hr: "HR & Recruitment",
+
+                // Modules
                 dashboard: "Dashboard",
+                socialAI: "Social Media AI",
+                qaAI: "QA AI",
+                mailAgent: "Mail Agent",
+                receptionAgent: "Reception Agent",
+                wfm: "Workforce (WFM)",
+                postDesigns: "POST Designs",
+                
+                // HR Legacy
+                zenats: "ATS (Recruitment)",
                 payroll: "Payroll",
-                employees: "Employees",
-                attendance: "Time & Attendance",
-                zenats: "ATS (Recruitment)", // Updated Name
-                performance: "Performance",
-                reports: "Reports",
-                whosOff: "Who's Off Today",
-                approvals: "Pending Approvals",
-                attendanceWidget: "My Attendance",
-                upcomingInterviews: "Upcoming Interviews",
-                viewAll: "View All",
-                clockIn: "Clock In",
-                clockOut: "Clock Out",
-                vacationBal: "Vacation Balance",
-                days: "Days",
-                wpsStatus: "WPS Status",
-                compliant: "Compliant",
-                activeJobs: "Active Jobs",
-                candidates: "New Candidates",
-                welcome: "Welcome back,",
-                roleAdmin: "HR Admin",
-                roleEmp: "Employee",
-                leaveReq: "Leave Request",
-                expenseClaim: "Expense Claim",
-                sickLeave: "Sick Leave",
-                remoteWork: "Remote Work",
-                payslip: "My Payslips",
-                mySchedule: "My Schedule",
-                requestTimeOff: "Request Time Off"
+                attendance: "Attendance",
+
+                // Widgets
+                connect: "Connect Account",
+                liveInsights: "Live Insights",
+                sentiment: "Sentiment Analysis",
+                schedule: "Schedule Adherence",
+                productivity: "Productivity",
+                callsHandled: "Calls Handled",
+                emailsProcessed: "Emails Processed",
+                status: "Status",
+                online: "Online",
+                busy: "Busy",
+                connect_desc: "Connect platforms to analyze live data.",
+                wfm_summary: "Real-time team performance."
             },
             ar: {
-                dashboard: "لوحة التحكم",
-                payroll: "مسير الرواتب",
-                employees: "الموظفين",
-                attendance: "الحضور والانصراف",
-                zenats: "نظام التوظيف (ATS)", // Updated Name
-                performance: "تقييم الأداء",
-                reports: "التقارير",
-                whosOff: "المجازين اليوم",
-                approvals: "الموافقات المعلقة",
-                attendanceWidget: "حضوري",
-                upcomingInterviews: "المقابلات القادمة",
-                viewAll: "عرض الكل",
-                clockIn: "تسجيل دخول",
-                clockOut: "تسجيل خروج",
-                vacationBal: "رصيد الإجازات",
-                days: "أيام",
-                wpsStatus: "حالة نظام حماية الأجور",
-                compliant: "متوافق",
-                activeJobs: "وظائف نشطة",
-                candidates: "مرشحين جدد",
-                welcome: "مرحباً بعودتك،",
-                roleAdmin: "مدير الموارد البشرية",
+                welcome: "نظرة عامة",
+                roleAdmin: "مدير النظام",
                 roleEmp: "موظف",
-                leaveReq: "طلب إجازة",
-                expenseClaim: "مطالبة مالية",
-                sickLeave: "إجازة مرضية",
-                remoteWork: "عمل عن بعد",
-                payslip: "قسائم الراتب",
-                mySchedule: "جدولي",
-                requestTimeOff: "طلب مغادرة"
-            }
-        };
+                
+                sec_core: "وحدات الذكاء الاصطناعي",
+                sec_ops: "العمليات",
+                sec_hr: "الموارد البشرية",
 
-        // Dummy Data
-        const data = {
-            whosOff: [
-                { name: "Ahmed Ali", type: "sickLeave", date: "Today", initials: "AA" },
-                { name: "Lina Basem", type: "remoteWork", date: "Today", initials: "LB" }
-            ],
-            approvals: [
-                { name: "John Doe", req: "leaveReq", date: "Oct 24", status: "status-pending" },
-                { name: "Sarah Smith", req: "expenseClaim", date: "Oct 23", status: "status-pending" }
-            ],
-            interviews: [
-                { role: "Senior Java Dev", candidate: "Mohammad K.", time: "10:00 AM" },
-                { role: "HR Specialist", candidate: "Nour H.", time: "02:00 PM" }
-            ]
+                dashboard: "لوحة التحكم",
+                socialAI: "تحليل التواصل الاجتماعي",
+                qaAI: "ضمان الجودة (AI)",
+                mailAgent: "عميل البريد الإلكتروني",
+                receptionAgent: "موظف الاستقبال الآلي",
+                wfm: "إدارة القوى العاملة (WFM)",
+                postDesigns: "تصاميم المنشورات",
+                
+                zenats: "نظام التوظيف (ATS)",
+                payroll: "مسير الرواتب",
+                attendance: "الحضور",
+
+                connect: "ربط الحساب",
+                liveInsights: "تحليلات مباشرة",
+                sentiment: "تحليل المشاعر",
+                schedule: "الالتزام بالجدول",
+                productivity: "الإنتاجية",
+                callsHandled: "المكالمات المستلمة",
+                emailsProcessed: "الرسائل المعالجة",
+                status: "الحالة",
+                online: "متصل",
+                busy: "مشغول",
+                connect_desc: "اربط المنصات لتحليل البيانات الحية.",
+                wfm_summary: "أداء الفريق في الوقت الفعلي."
+            }
         };
 
         // --- RENDER FUNCTIONS ---
 
         function renderSidebar() {
             const t = i18n[state.lang];
-            const nav = document.getElementById('nav-links');
-            nav.innerHTML = '';
+            const navContainer = document.getElementById('nav-container');
+            navContainer.innerHTML = '';
 
-            let items = [];
+            // Admin Sidebar Layout with Categories
+            let sections = [];
             
-            // Sidebar items vary by role
             if (state.role === 'admin') {
-                items = [
-                    { icon: 'fa-chart-pie', label: t.dashboard, active: true },
-                    { icon: 'fa-money-bill-wave', label: t.payroll }, 
-                    { icon: 'fa-users', label: t.employees }, 
-                    { icon: 'fa-clock', label: t.attendance }, 
-                    { icon: 'fa-briefcase', label: t.zenats }, // Using updated label
-                    { icon: 'fa-star', label: t.performance },
-                    { icon: 'fa-file-alt', label: t.reports }
+                sections = [
+                    {
+                        title: t.sec_core,
+                        items: [
+                            { icon: 'fa-chart-pie', label: t.dashboard, active: true },
+                            { icon: 'fa-share-nodes', label: t.socialAI }, // New
+                            { icon: 'fa-robot', label: t.qaAI }, // New
+                            { icon: 'fa-envelope-open-text', label: t.mailAgent }, // New
+                            { icon: 'fa-headset', label: t.receptionAgent }, // New
+                            { icon: 'fa-palette', label: t.postDesigns }, // New
+                        ]
+                    },
+                    {
+                        title: t.sec_ops,
+                        items: [
+                            { icon: 'fa-timeline', label: t.wfm }, // New
+                        ]
+                    },
+                    {
+                        title: t.sec_hr,
+                        items: [
+                            { icon: 'fa-briefcase', label: t.zenats },
+                            { icon: 'fa-money-bill-wave', label: t.payroll },
+                            { icon: 'fa-clock', label: t.attendance }
+                        ]
+                    }
                 ];
             } else {
-                items = [
-                    { icon: 'fa-home', label: t.dashboard, active: true },
-                    { icon: 'fa-calendar-alt', label: t.mySchedule },
-                    { icon: 'fa-file-invoice-dollar', label: t.payslip }, 
-                    { icon: 'fa-plane', label: t.requestTimeOff } 
+                // Agent View (Simplified)
+                sections = [
+                    {
+                        title: "Agent Tools",
+                        items: [
+                            { icon: 'fa-home', label: t.dashboard, active: true },
+                            { icon: 'fa-calendar', label: t.schedule },
+                            { icon: 'fa-envelope', label: "My Emails" }
+                        ]
+                    }
                 ];
             }
 
-            items.forEach(item => {
-                const li = document.createElement('li');
-                li.className = `nav-item ${item.active ? 'active' : ''}`;
-                li.innerHTML = `<i class="fa-solid ${item.icon}"></i> <span>${item.label}</span>`;
-                li.onclick = () => {
-                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-                    li.classList.add('active');
-                };
-                nav.appendChild(li);
+            sections.forEach(sec => {
+                if(sec.title) {
+                    const header = document.createElement('div');
+                    header.className = 'nav-header';
+                    header.innerText = sec.title;
+                    navContainer.appendChild(header);
+                }
+                const ul = document.createElement('ul');
+                ul.className = 'nav-links';
+                
+                sec.items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = `nav-item ${item.active ? 'active' : ''}`;
+                    li.innerHTML = `<i class="fa-solid ${item.icon}"></i> <span>${item.label}</span>`;
+                    li.onclick = () => {
+                        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                        li.classList.add('active');
+                    };
+                    ul.appendChild(li);
+                });
+                navContainer.appendChild(ul);
             });
         }
 
@@ -361,145 +388,129 @@
             const main = document.getElementById('main-view');
             const userName = document.getElementById('user-name').innerText;
             
-            // Dynamic HTML construction
             let html = `
                 <div class="page-title">
-                    ${t.welcome} ${userName}
+                    ${t.welcome}
                     <div style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 5px;">
-                        ${state.role === 'admin' ? t.roleAdmin : t.roleEmp} - ${new Date().toDateString()}
+                        ${state.role === 'admin' ? t.roleAdmin : t.roleEmp}
                     </div>
                 </div>
                 <div class="dashboard-grid">
             `;
 
-            // 1. Attendance Widget (Common to both)
-            html += `
-                <section class="card attendance-box">
-                    <div class="card-title">${t.attendanceWidget}</div>
-                    <div class="clock-time" id="clock">09:41:00 AM</div>
-                    <div style="font-size: 0.8rem; color: #777; margin-bottom: 15px;">
-                        <i class="fa-solid fa-location-dot"></i> Amman Office (IP: 192.168.1.1)
-                    </div>
-                    <button class="btn-primary" style="width: 80%;">${t.clockIn}</button>
-                </section>
-            `;
-
             if (state.role === 'admin') {
-                // ADMIN WIDGETS
-                
-                // 2. Who's Off
+                // 1. Social Media AI Widget
                 html += `
                     <section class="card">
                         <div class="card-header">
-                            <div class="card-title">${t.whosOff}</div>
-                            <a href="#" class="card-action">${t.viewAll}</a>
+                            <div class="card-title"><i class="fa-solid fa-share-nodes" style="color:var(--info)"></i> ${t.socialAI}</div>
                         </div>
-                        ${data.whosOff.map(p => `
-                            <div class="list-item">
-                                <div class="avatar-small" style="background:#e3f2fd; color:#2980b9">${p.initials}</div>
-                                <div class="item-details">
-                                    <div class="item-title">${p.name}</div>
-                                    <div class="item-subtitle">${t[p.type]}</div>
-                                </div>
-                                <div class="status-tag status-approved">${p.date}</div>
+                        <div style="text-align:center; padding: 10px 0;">
+                            <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">${t.connect_desc}</p>
+                            <button class="btn-connect">
+                                <i class="fa-brands fa-facebook"></i>
+                                <i class="fa-brands fa-twitter"></i>
+                                <i class="fa-brands fa-instagram"></i>
+                                <span>${t.connect}</span>
+                            </button>
+                        </div>
+                        <div style="margin-top:15px; padding-top:15px; border-top:1px solid #eee;">
+                            <div class="stat-label">${t.liveInsights}</div>
+                            <div style="height:40px; display:flex; align-items:flex-end; gap:3px; margin-top:5px; justify-content:center; opacity:0.5;">
+                                <div style="width:5px; height:20%; background:var(--info)"></div>
+                                <div style="width:5px; height:50%; background:var(--info)"></div>
+                                <div style="width:5px; height:80%; background:var(--info)"></div>
+                                <div style="width:5px; height:40%; background:var(--info)"></div>
+                                <div style="width:5px; height:60%; background:var(--info)"></div>
+                                <div style="width:5px; height:30%; background:var(--info)"></div>
                             </div>
-                        `).join('')}
+                        </div>
                     </section>
                 `;
 
-                // 3. Approvals
+                // 2. WFM Widget
                 html += `
                     <section class="card">
                         <div class="card-header">
-                            <div class="card-title">${t.approvals}</div>
-                            <div class="badge" style="position:static; background:var(--warning)">2</div>
+                            <div class="card-title"><i class="fa-solid fa-timeline" style="color:var(--warning)"></i> ${t.wfm}</div>
                         </div>
-                        ${data.approvals.map(a => `
-                            <div class="list-item">
-                                <div class="item-details">
-                                    <div class="item-title">${a.name}</div>
-                                    <div class="item-subtitle">${t[a.req]}</div>
-                                </div>
-                                <button class="btn-outline" style="color:var(--success); border-color:var(--success)"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-outline" style="color:var(--danger); border-color:var(--danger); margin: 0 5px;"><i class="fa-solid fa-xmark"></i></button>
-                            </div>
-                        `).join('')}
+                        <div class="stat-row">
+                            <span class="stat-label">${t.schedule}</span>
+                            <span class="stat-value">92%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+                        
+                        <div class="stat-row" style="margin-top:20px;">
+                            <span class="stat-label">${t.productivity}</span>
+                            <span class="stat-value">88%</span>
+                        </div>
+                        <div class="progress-bar"><div class="progress-fill" style="width:88%; background:var(--primary)"></div></div>
+                        
+                        <div style="margin-top:20px; font-size:0.8rem; color:#777; text-align:center;">
+                            <i class="fa-solid fa-circle-check" style="color:var(--success)"></i> System Operational
+                        </div>
                     </section>
                 `;
 
-                // 4. Recruitment (ZenATS)
+                // 3. Agent Status Widget (Mail & Reception)
                 html += `
                     <section class="card">
                         <div class="card-header">
-                            <div class="card-title">${t.zenats}</div>
+                            <div class="card-title">${t.status} Overview</div>
                         </div>
-                        <div class="stat-row">
-                            <span class="stat-label">${t.activeJobs}</span>
-                            <span class="stat-value">4</span>
+                        
+                        <div class="agent-status">
+                            <div class="status-dot online"></div>
+                            <div style="flex:1">
+                                <div style="font-weight:600; font-size:0.9rem;">${t.mailAgent}</div>
+                                <div style="font-size:0.75rem; color:#666;">Processing Queue: 12</div>
+                            </div>
+                            <i class="fa-solid fa-envelope" style="color:#ccc"></i>
                         </div>
-                        <div class="stat-row">
-                            <span class="stat-label">${t.candidates}</span>
-                            <span class="stat-value" style="color:var(--success)">+12</span>
+
+                        <div class="agent-status">
+                            <div class="status-dot busy"></div>
+                            <div style="flex:1">
+                                <div style="font-weight:600; font-size:0.9rem;">${t.receptionAgent}</div>
+                                <div style="font-size:0.75rem; color:#666;">On Call: +962 79...</div>
+                            </div>
+                            <i class="fa-solid fa-phone" style="color:var(--primary)"></i>
                         </div>
-                        <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
-                            <div class="item-subtitle" style="margin-bottom:5px;">${t.upcomingInterviews}</div>
-                            ${data.interviews.map(i => `
-                                <div style="font-size:0.85rem; padding: 5px 0;">
-                                    <strong>${i.time}</strong> - ${i.candidate} <span style="color:#777">(${i.role})</span>
-                                </div>
-                            `).join('')}
+
+                         <div class="agent-status">
+                            <div class="status-dot online"></div>
+                            <div style="flex:1">
+                                <div style="font-weight:600; font-size:0.9rem;">${t.postDesigns}</div>
+                                <div style="font-size:0.75rem; color:#666;">Generating assets...</div>
+                            </div>
+                            <i class="fa-solid fa-palette" style="color:#ccc"></i>
                         </div>
                     </section>
                 `;
-                
-                // 5. Payroll Snapshot
+
+                // 4. ZenATS (Recruitment) - Kept from previous
                 html += `
                     <section class="card">
                         <div class="card-header">
-                            <div class="card-title">${t.payroll}</div>
+                            <div class="card-title"><i class="fa-solid fa-briefcase"></i> ${t.zenats}</div>
                         </div>
                         <div class="stat-row">
-                            <span class="stat-label">${t.wpsStatus}</span>
-                            <span class="stat-value" style="color:var(--success); font-size:1rem"><i class="fa-solid fa-check-circle"></i> ${t.compliant}</span>
+                            <span class="stat-label">New Applicants</span>
+                            <span class="stat-value" style="color:var(--success)">+5</span>
                         </div>
-                        <div style="height: 100px; background: #f9f9f9; display:flex; align-items:center; justify-content:center; border-radius:4px; margin-top:10px; color:#aaa; font-size:0.8rem;">
-                            [Chart Visualization Placeholder]
+                        <div class="stat-row">
+                            <span class="stat-label">QA AI Screened</span>
+                            <span class="stat-value">3</span>
+                        </div>
+                        <div style="margin-top:10px;">
+                            <button class="btn-outline" style="width:100%">View Pipeline</button>
                         </div>
                     </section>
                 `;
 
             } else {
-                // EMPLOYEE WIDGETS
-
-                // 2. Vacation Balance
-                html += `
-                    <section class="card">
-                        <div class="card-header">
-                            <div class="card-title">${t.vacationBal}</div>
-                        </div>
-                        <div style="text-align:center;">
-                            <div style="font-size:2.5rem; font-weight:700; color:var(--primary)">14.5</div>
-                            <div style="color:var(--text-muted)">${t.days}</div>
-                        </div>
-                        <button class="btn-outline" style="width:100%; margin-top:15px;">${t.requestTimeOff}</button>
-                    </section>
-                `;
-
-                // 3. Last Payslip
-                html += `
-                    <section class="card">
-                        <div class="card-header">
-                            <div class="card-title">${t.payslip}</div>
-                        </div>
-                        <div class="list-item">
-                            <div class="item-details">
-                                <div class="item-title">October 2023</div>
-                                <div class="item-subtitle">Basic + Housing + Transport</div>
-                            </div>
-                            <i class="fa-solid fa-download" style="color:var(--text-muted)"></i>
-                        </div>
-                    </section>
-                `;
+                // Agent View (Simplified)
+                html += `<div style="padding:20px; color:#666;">Agent Dashboard View Loaded...</div>`;
             }
 
             html += `</div>`; // End grid
@@ -511,14 +522,6 @@
         function changeRole() {
             const select = document.getElementById('role-select');
             state.role = select.value;
-            
-            // Update Avatar/Name to simulate persona change
-            if (state.role === 'admin') {
-                document.getElementById('user-name').innerText = "Sarah Connor";
-            } else {
-                document.getElementById('user-name').innerText = "John Anderson";
-            }
-
             renderSidebar();
             renderDashboard();
         }
@@ -532,7 +535,7 @@
                 html.setAttribute('dir', 'rtl');
                 html.setAttribute('lang', 'ar');
                 langBtn.innerText = "English";
-                document.body.style.fontFamily = "Tahoma, sans-serif"; // Better for Arabic
+                document.body.style.fontFamily = "Tahoma, sans-serif"; 
             } else {
                 html.setAttribute('dir', 'ltr');
                 html.setAttribute('lang', 'en');
@@ -547,16 +550,6 @@
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('active');
         }
-
-        // --- INITIALIZATION ---
-        
-        // Clock Ticker
-        setInterval(() => {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-            const clockEl = document.getElementById('clock');
-            if(clockEl) clockEl.innerText = timeString;
-        }, 1000);
 
         // Init
         document.getElementById('current-date').innerText = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
