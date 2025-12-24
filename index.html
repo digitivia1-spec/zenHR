@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenHR Clone - High Fidelity Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Neutral Corporate Theme Variables */
+            --bg-body: #f4f6f8;
+            --bg-sidebar: #2c3e50; /* Professional Slate */
+            --bg-sidebar-active: #34495e;
+            --text-sidebar: #ecf0f1;
+            --primary: #2980b9; /* Corporate Blue */
+            --primary-hover: #1abc9c; /* Slight nod to ZenHR Teal for accents */
+            --text-main: #333;
+            --text-muted: #777;
+            --border: #e0e0e0;
+            --card-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #c0392b;
+        }
+
+        /* RTL Support Variables */
+        html[dir="rtl"] {
+            --sidebar-width: 260px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
+        body { background-color: var(--bg-body); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
+
+        /* Sidebar Styles - [cite: 38] Sidebar Layout */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .logo-area {
+            height: 64px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .logo-area i { margin-right: 10px; color: var(--primary-hover); }
+        html[dir="rtl"] .logo-area i { margin-right: 0; margin-left: 10px; }
+
+        .nav-links { list-style: none; padding: 20px 0; flex-grow: 1; overflow-y: auto; }
+        .nav-item { padding: 12px 20px; display: flex; align-items: center; cursor: pointer; transition: 0.2s; color: #bdc3c7; }
+        .nav-item:hover, .nav-item.active { background-color: var(--bg-sidebar-active); color: #fff; border-left: 4px solid var(--primary-hover); }
+        html[dir="rtl"] .nav-item:hover, html[dir="rtl"] .nav-item.active { border-left: none; border-right: 4px solid var(--primary-hover); }
+        
+        .nav-item i { width: 25px; margin-right: 10px; text-align: center; }
+        html[dir="rtl"] .nav-item i { margin-right: 0; margin-left: 10px; }
+
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        .top-header {
+            height: 64px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+        }
+
+        .user-controls { display: flex; align-items: center; gap: 20px; }
+        .icon-btn { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; position: relative; }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 50%; }
+
+        .dropdown { position: relative; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 500; }
+        .dropdown img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+        
+        /* Dashboard Content */
+        .content-scroll { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        .page-title { margin-bottom: 25px; font-size: 1.5rem; font-weight: 600; }
+
+        /* Widgets Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+        }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .card-title { font-weight: 600; color: var(--text-main); font-size: 1rem; }
+        .card-action { color: var(--primary); font-size: 0.85rem; cursor: pointer; text-decoration: none; }
+
+        /* Specific Widgets Styles */
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .stat-value { font-weight: 700; font-size: 1.2rem; }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+
+        .attendance-box { text-align: center; padding: 20px 0; }
+        .clock-time { font-size: 2rem; font-weight: 700; color: var(--primary-hover); margin: 10px 0; }
+        .btn-clock { background: var(--primary); color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-weight: 600; }
+        
+        .list-item { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+        .list-item:last-child { border-bottom: none; }
+        .avatar-small { width: 40px; height: 40px; border-radius: 50%; background: #eee; display: flex; align-items: center; justify-content: center; margin-right: 15px; font-size: 0.8rem; font-weight: bold; color: #555; }
+        html[dir="rtl"] .avatar-small { margin-right: 0; margin-left: 15px; }
+        .item-details { flex-grow: 1; }
+        .item-title { font-size: 0.95rem; font-weight: 500; }
+        .item-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+        .status-tag { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
+        .status-pending { background: #fff3cd; color: #856404; }
+        .status-approved { background: #d4edda; color: #155724; }
+
+        /* Button Styles */
+        .btn-primary { background-color: var(--primary); color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; }
+        .btn-outline { background-color: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { position: absolute; left: -260px; height: 100%; z-index: 1000; }
+            .sidebar.active { left: 0; }
+            html[dir="rtl"] .sidebar { left: auto; right: -260px; }
+            html[dir="rtl"] .sidebar.active { right: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="logo-area">
+            <i class="fa-solid fa-leaf"></i>
+            <span>ZenHR</span>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            </ul>
+    </nav>
+
+    <div class="main-content">
+        <header class="top-header">
+            <div class="header-left">
+                <i class="fa-solid fa-bars icon-btn" onclick="toggleSidebar()" style="display:none;"></i> 
+                <span id="current-date" style="font-size: 0.9rem; color: var(--text-muted);"></span>
+            </div>
+            
+            <div class="user-controls">
+                <select id="role-select" class="btn-outline" onchange="changeRole()">
+                    <option value="admin">HR Admin</option>
+                    <option value="employee">Employee</option>
+                </select>
+
+                <button class="btn-outline" onclick="toggleLang()" id="lang-btn">عربي</button>
+                
+                <i class="fa-regular fa-bell icon-btn"><span class="badge">3</span></i>
+                
+                <div class="dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=2980b9&color=fff" alt="User" id="user-avatar">
+                    <span id="user-name">Sarah Connor</span>
+                    <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-scroll" id="main-view">
+            </main>
+    </div>
+
+    <script>
+        // --- DATA & CONFIG ---
+        
+        const state = {
+            role: 'admin', // 'admin' or 'employee'
+            lang: 'en'     // 'en' or 'ar'
+        };
+
+        // Text Dictionary for Localization (Neutral Corporate Tone)
+        const i18n = {
+            en: {
+                dashboard: "Dashboard",
+                payroll: "Payroll",
+                employees: "Employees",
+                attendance: "Time & Attendance",
+                zenats: "ZenATS (Recruitment)",
+                performance: "Performance",
+                reports: "Reports",
+                whosOff: "Who's Off Today",
+                approvals: "Pending Approvals",
+                attendanceWidget: "My Attendance",
+                upcomingInterviews: "Upcoming Interviews",
+                viewAll: "View All",
+                clockIn: "Clock In",
+                clockOut: "Clock Out",
+                vacationBal: "Vacation Balance",
+                days: "Days",
+                wpsStatus: "WPS Status",
+                compliant: "Compliant",
+                activeJobs: "Active Jobs",
+                candidates: "New Candidates",
+                welcome: "Welcome back,",
+                roleAdmin: "HR Admin",
+                roleEmp: "Employee",
+                leaveReq: "Leave Request",
+                expenseClaim: "Expense Claim",
+                sickLeave: "Sick Leave",
+                remoteWork: "Remote Work",
+                payslip: "My Payslips",
+                mySchedule: "My Schedule",
+                requestTimeOff: "Request Time Off"
+            },
+            ar: {
+                dashboard: "لوحة التحكم",
+                payroll: "مسير الرواتب",
+                employees: "الموظفين",
+                attendance: "الحضور والانصراف",
+                zenats: "نظام التوظيف ZenATS",
+                performance: "تقييم الأداء",
+                reports: "التقارير",
+                whosOff: "المجازين اليوم",
+                approvals: "الموافقات المعلقة",
+                attendanceWidget: "حضوري",
+                upcomingInterviews: "المقابلات القادمة",
+                viewAll: "عرض الكل",
+                clockIn: "تسجيل دخول",
+                clockOut: "تسجيل خروج",
+                vacationBal: "رصيد الإجازات",
+                days: "أيام",
+                wpsStatus: "حالة نظام حماية الأجور",
+                compliant: "متوافق",
+                activeJobs: "وظائف نشطة",
+                candidates: "مرشحين جدد",
+                welcome: "مرحباً بعودتك،",
+                roleAdmin: "مدير الموارد البشرية",
+                roleEmp: "موظف",
+                leaveReq: "طلب إجازة",
+                expenseClaim: "مطالبة مالية",
+                sickLeave: "إجازة مرضية",
+                remoteWork: "عمل عن بعد",
+                payslip: "قسائم الراتب",
+                mySchedule: "جدولي",
+                requestTimeOff: "طلب مغادرة"
+            }
+        };
+
+        // Dummy Data [cite: 785, 778, 1309]
+        const data = {
+            whosOff: [
+                { name: "Ahmed Ali", type: "sickLeave", date: "Today", initials: "AA" },
+                { name: "Lina Basem", type: "remoteWork", date: "Today", initials: "LB" }
+            ],
+            approvals: [
+                { name: "John Doe", req: "leaveReq", date: "Oct 24", status: "status-pending" },
+                { name: "Sarah Smith", req: "expenseClaim", date: "Oct 23", status: "status-pending" }
+            ],
+            interviews: [
+                { role: "Senior Java Dev", candidate: "Mohammad K.", time: "10:00 AM" },
+                { role: "HR Specialist", candidate: "Nour H.", time: "02:00 PM" }
+            ]
+        };
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderSidebar() {
+            const t = i18n[state.lang];
+            const nav = document.getElementById('nav-links');
+            nav.innerHTML = '';
+
+            let items = [];
+            
+            // Sidebar items vary by role
+            if (state.role === 'admin') {
+                items = [
+                    { icon: 'fa-chart-pie', label: t.dashboard, active: true },
+                    { icon: 'fa-money-bill-wave', label: t.payroll }, // 
+                    { icon: 'fa-users', label: t.employees }, // [cite: 525]
+                    { icon: 'fa-clock', label: t.attendance }, // [cite: 595]
+                    { icon: 'fa-briefcase', label: t.zenats }, // 
+                    { icon: 'fa-star', label: t.performance },
+                    { icon: 'fa-file-alt', label: t.reports }
+                ];
+            } else {
+                items = [
+                    { icon: 'fa-home', label: t.dashboard, active: true },
+                    { icon: 'fa-calendar-alt', label: t.mySchedule },
+                    { icon: 'fa-file-invoice-dollar', label: t.payslip }, // [cite: 669]
+                    { icon: 'fa-plane', label: t.requestTimeOff } // [cite: 806]
+                ];
+            }
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = `nav-item ${item.active ? 'active' : ''}`;
+                li.innerHTML = `<i class="fa-solid ${item.icon}"></i> <span>${item.label}</span>`;
+                li.onclick = () => {
+                    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                    li.classList.add('active');
+                };
+                nav.appendChild(li);
+            });
+        }
+
+        function renderDashboard() {
+            const t = i18n[state.lang];
+            const main = document.getElementById('main-view');
+            const userName = document.getElementById('user-name').innerText;
+            
+            // Dynamic HTML construction based on Neutral Corporate Theme
+            let html = `
+                <div class="page-title">
+                    ${t.welcome} ${userName}
+                    <div style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 5px;">
+                        ${state.role === 'admin' ? t.roleAdmin : t.roleEmp} - ${new Date().toDateString()}
+                    </div>
+                </div>
+                <div class="dashboard-grid">
+            `;
+
+            // 1. Attendance Widget (Common to both but different controls) 
+            html += `
+                <section class="card attendance-box">
+                    <div class="card-title">${t.attendanceWidget}</div>
+                    <div class="clock-time" id="clock">09:41:00 AM</div>
+                    <div style="font-size: 0.8rem; color: #777; margin-bottom: 15px;">
+                        <i class="fa-solid fa-location-dot"></i> Amman Office (IP: 192.168.1.1)
+                    </div>
+                    <button class="btn-primary" style="width: 80%;">${t.clockIn}</button>
+                </section>
+            `;
+
+            if (state.role === 'admin') {
+                // ADMIN WIDGETS
+                
+                // 2. Who's Off 
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.whosOff}</div>
+                            <a href="#" class="card-action">${t.viewAll}</a>
+                        </div>
+                        ${data.whosOff.map(p => `
+                            <div class="list-item">
+                                <div class="avatar-small" style="background:#e3f2fd; color:#2980b9">${p.initials}</div>
+                                <div class="item-details">
+                                    <div class="item-title">${p.name}</div>
+                                    <div class="item-subtitle">${t[p.type]}</div>
+                                </div>
+                                <div class="status-tag status-approved">${p.date}</div>
+                            </div>
+                        `).join('')}
+                    </section>
+                `;
+
+                // 3. Approvals 
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.approvals}</div>
+                            <div class="badge" style="position:static; background:var(--warning)">2</div>
+                        </div>
+                        ${data.approvals.map(a => `
+                            <div class="list-item">
+                                <div class="item-details">
+                                    <div class="item-title">${a.name}</div>
+                                    <div class="item-subtitle">${t[a.req]}</div>
+                                </div>
+                                <button class="btn-outline" style="color:var(--success); border-color:var(--success)"><i class="fa-solid fa-check"></i></button>
+                                <button class="btn-outline" style="color:var(--danger); border-color:var(--danger); margin: 0 5px;"><i class="fa-solid fa-xmark"></i></button>
+                            </div>
+                        `).join('')}
+                    </section>
+                `;
+
+                // 4. ZenATS / Recruitment 
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.zenats}</div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">${t.activeJobs}</span>
+                            <span class="stat-value">4</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">${t.candidates}</span>
+                            <span class="stat-value" style="color:var(--success)">+12</span>
+                        </div>
+                        <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
+                            <div class="item-subtitle" style="margin-bottom:5px;">${t.upcomingInterviews}</div>
+                            ${data.interviews.map(i => `
+                                <div style="font-size:0.85rem; padding: 5px 0;">
+                                    <strong>${i.time}</strong> - ${i.candidate} <span style="color:#777">(${i.role})</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+                
+                // 5. Payroll Snapshot 
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.payroll}</div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">${t.wpsStatus}</span>
+                            <span class="stat-value" style="color:var(--success); font-size:1rem"><i class="fa-solid fa-check-circle"></i> ${t.compliant}</span>
+                        </div>
+                        <div style="height: 100px; background: #f9f9f9; display:flex; align-items:center; justify-content:center; border-radius:4px; margin-top:10px; color:#aaa; font-size:0.8rem;">
+                            [Chart Visualization Placeholder]
+                        </div>
+                    </section>
+                `;
+
+            } else {
+                // EMPLOYEE WIDGETS [cite: 668]
+
+                // 2. Vacation Balance [cite: 809]
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.vacationBal}</div>
+                        </div>
+                        <div style="text-align:center;">
+                            <div style="font-size:2.5rem; font-weight:700; color:var(--primary)">14.5</div>
+                            <div style="color:var(--text-muted)">${t.days}</div>
+                        </div>
+                        <button class="btn-outline" style="width:100%; margin-top:15px;">${t.requestTimeOff}</button>
+                    </section>
+                `;
+
+                // 3. Last Payslip 
+                html += `
+                    <section class="card">
+                        <div class="card-header">
+                            <div class="card-title">${t.payslip}</div>
+                        </div>
+                        <div class="list-item">
+                            <div class="item-details">
+                                <div class="item-title">October 2023</div>
+                                <div class="item-subtitle">Basic + Housing + Transport</div>
+                            </div>
+                            <i class="fa-solid fa-download" style="color:var(--text-muted)"></i>
+                        </div>
+                    </section>
+                `;
+            }
+
+            html += `</div>`; // End grid
+            main.innerHTML = html;
+        }
+
+        // --- ACTIONS ---
+
+        function changeRole() {
+            const select = document.getElementById('role-select');
+            state.role = select.value;
+            
+            // Update Avatar/Name to simulate persona change
+            if (state.role === 'admin') {
+                document.getElementById('user-name').innerText = "Sarah Connor";
+            } else {
+                document.getElementById('user-name').innerText = "John Anderson";
+            }
+
+            renderSidebar();
+            renderDashboard();
+        }
+
+        function toggleLang() {
+            state.lang = state.lang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            const langBtn = document.getElementById('lang-btn');
+            
+            if (state.lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                langBtn.innerText = "English";
+                document.body.style.fontFamily = "Tahoma, sans-serif"; // Better for Arabic
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                langBtn.innerText = "عربي";
+                document.body.style.fontFamily = "'Inter', sans-serif";
+            }
+            
+            renderSidebar();
+            renderDashboard();
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // --- INITIALIZATION ---
+        
+        // Clock Ticker
+        setInterval(() => {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const clockEl = document.getElementById('clock');
+            if(clockEl) clockEl.innerText = timeString;
+        }, 1000);
+
+        // Init
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        renderSidebar();
+        renderDashboard();
+
+    </script>
+</body>
+</html>
