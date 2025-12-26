@@ -9,12 +9,13 @@
     
     <style>
         :root {
+            /* Neutral Corporate Theme Variables */
             --bg-body: #f4f6f8;
-            --bg-sidebar: #2c3e50;
+            --bg-sidebar: #2c3e50; /* Professional Slate */
             --bg-sidebar-active: #34495e;
             --text-sidebar: #ecf0f1;
-            --primary: #2980b9;
-            --primary-hover: #1abc9c;
+            --primary: #2980b9; /* Corporate Blue */
+            --primary-hover: #1abc9c; /* Teal Accent */
             --text-main: #333;
             --text-muted: #777;
             --border: #e0e0e0;
@@ -25,89 +26,206 @@
             --info: #8e44ad;
         }
 
-        html[dir="rtl"] { --sidebar-width: 260px; }
+        /* RTL Support Variables */
+        html[dir="rtl"] {
+            --sidebar-width: 260px;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        
         body { background-color: var(--bg-body); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
 
-        /* Sidebar */
-        .sidebar { width: 260px; background-color: var(--bg-sidebar); color: var(--text-sidebar); display: flex; flex-direction: column; transition: all 0.3s; flex-shrink: 0; height: 100vh; }
-        .logo-area { height: 70px; display: flex; align-items: center; padding: 0 20px; font-size: 1.3rem; font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.1); background: var(--bg-sidebar); color: #fff; }
-        .logo-area img { height: 40px; margin-right: 10px; object-fit: contain; background: white; padding: 2px; border-radius: 4px; }
-        #nav-container { flex-grow: 1; overflow-y: auto; display: flex; flex-direction: column; }
+        /* Sidebar Styles */
+        .sidebar {
+            width: 260px;
+            background-color: var(--bg-sidebar);
+            color: var(--text-sidebar);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            height: 100vh; /* Ensure full height for scrolling */
+        }
+
+        .logo-area {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            background: var(--bg-sidebar); /* Changed to match sidebar color */
+            color: #fff; /* Changed to white text */
+        }
+        
+        .logo-area img { height: 40px; margin-right: 10px; object-fit: contain; background: white; padding: 2px; border-radius: 4px; } /* Added small white bg to logo for visibility on dark sidebar */
+        html[dir="rtl"] .logo-area img { margin-right: 0; margin-left: 10px; }
+
+        /* Navigation Container for Scrolling */
+        #nav-container {
+            flex-grow: 1;
+            overflow-y: auto; /* Enable vertical scrolling */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Scrollbar Styling for Sidebar */
         #nav-container::-webkit-scrollbar { width: 6px; }
+        #nav-container::-webkit-scrollbar-track { background: var(--bg-sidebar); }
         #nav-container::-webkit-scrollbar-thumb { background: #4b6cb7; border-radius: 3px; }
+
+        .nav-links { list-style: none; padding: 10px 0; }
         .nav-header { padding: 15px 20px 5px 20px; font-size: 0.75rem; text-transform: uppercase; color: #7f8c8d; font-weight: 600; letter-spacing: 1px; }
         .nav-item { padding: 12px 20px; display: flex; align-items: center; cursor: pointer; transition: 0.2s; color: #bdc3c7; font-size: 0.9rem; }
         .nav-item:hover, .nav-item.active { background-color: var(--bg-sidebar-active); color: #fff; border-left: 4px solid var(--primary-hover); }
+        html[dir="rtl"] .nav-item:hover, html[dir="rtl"] .nav-item.active { border-left: none; border-right: 4px solid var(--primary-hover); }
+        
         .nav-item i { width: 25px; margin-right: 10px; text-align: center; }
+        html[dir="rtl"] .nav-item i { margin-right: 0; margin-left: 10px; }
 
-        /* Main Content */
-        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; }
-        .top-header { height: 70px; background: #fff; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; flex-shrink: 0; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 15px; }
-        .branding-logos { display: flex; align-items: center; gap: 15px; margin-left: 20px; padding-left: 20px; border-left: 1px solid var(--border); }
-        .branding-logos img.secondary-logo { height: 60px; width: auto; object-fit: contain; }
-        .branding-logos img.primary-logo { height: 45px; width: auto; object-fit: contain; }
+        /* Main Content Area */
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Header */
+        .top-header {
+            height: 70px;
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            flex-shrink: 0;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 15px; }
+
+        .header-right { display: flex; align-items: center; gap: 20px; }
+
+        /* Logo Container in Top Right */
+        .branding-logos {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 20px;
+            padding-left: 20px;
+            border-left: 1px solid var(--border);
+        }
+        html[dir="rtl"] .branding-logos {
+            margin-left: 0; padding-left: 0;
+            margin-right: 20px; padding-right: 20px;
+            border-left: none; border-right: 1px solid var(--border);
+        }
+
+        .branding-logos img.secondary-logo {
+            height: 80px; /* Increased size as requested */
+            width: auto;
+            object-fit: contain;
+        }
+        
+        .branding-logos img.primary-logo {
+            height: 45px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .user-controls { display: flex; align-items: center; gap: 15px; }
+        
+        .icon-btn { cursor: pointer; color: var(--text-muted); font-size: 1.1rem; position: relative; }
+        .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: #fff; font-size: 0.6rem; padding: 2px 5px; border-radius: 50%; }
+
+        .dropdown { position: relative; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 0.9rem; font-weight: 500; }
+        .dropdown img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); }
+        
+        /* Dashboard Content */
         .content-scroll { flex-grow: 1; overflow-y: auto; padding: 30px; }
-        .page-title { margin-bottom: 25px; font-size: 1.5rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .page-title { margin-bottom: 25px; font-size: 1.5rem; font-weight: 600; }
 
-        /* Generic Card & Grid */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
-        .card { background: #fff; border-radius: 8px; padding: 20px; box-shadow: var(--card-shadow); border: 1px solid var(--border); position: relative; height: 100%; }
+        /* Widgets Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 Columns for top row */
+            gap: 20px;
+        }
+        .dashboard-grid-bottom {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .grid-span-2 { grid-column: span 2; }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border);
+            position: relative;
+            height: 100%;
+        }
+
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .card-title { font-weight: 700; color: var(--text-main); font-size: 1rem; }
+        .card-title { font-weight: 700; color: var(--text-main); font-size: 1rem; display: flex; align-items: center; gap: 8px; }
+        .card-action { color: var(--primary); font-size: 0.85rem; cursor: pointer; text-decoration: none; }
+
+        /* Specific Widgets Styles */
         
-        /* Buttons */
-        .btn-primary { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
-        .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
-        .btn-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ddd; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-
-        /* --- MODULE SPECIFIC STYLES --- */
-
-        /* Mail Agent */
-        .mail-layout { display: flex; height: calc(100vh - 160px); background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-        .mail-sidebar { width: 200px; border-right: 1px solid var(--border); padding: 15px; background: #f9f9f9; }
-        .mail-list { width: 300px; border-right: 1px solid var(--border); overflow-y: auto; }
-        .mail-view { flex-grow: 1; padding: 20px; overflow-y: auto; }
-        .mail-item { padding: 15px; border-bottom: 1px solid #eee; cursor: pointer; transition: 0.2s; }
-        .mail-item:hover, .mail-item.active { background: #f0f7fa; border-left: 3px solid var(--primary); }
-        .mail-compose-btn { width: 100%; padding: 10px; background: var(--primary); color: white; border: none; border-radius: 20px; margin-bottom: 15px; cursor: pointer; font-weight: 600; }
-
-        /* Social AI */
-        .social-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
-        .chart-bar-container { display: flex; align-items: flex-end; height: 150px; gap: 10px; padding-top: 20px; }
-        .chart-bar { flex: 1; background: var(--info); opacity: 0.7; border-radius: 4px 4px 0 0; transition: height 0.5s; position: relative; }
-        .chart-bar:hover { opacity: 1; }
-        .connect-btn { background: #000; color: #fff; padding: 10px 20px; border-radius: 6px; border: none; display: flex; align-items: center; gap: 10px; cursor: pointer; width: 100%; justify-content: center; }
-
-        /* Post Designs */
-        .post-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .post-card { border: 1px solid #eee; border-radius: 8px; overflow: hidden; background: #fff; transition: transform 0.2s; }
-        .post-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .post-img { height: 150px; background: #eee; display: flex; align-items: center; justify-content: center; color: #aaa; }
-        .post-body { padding: 15px; }
-        .ai-badge { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; float: right; }
-
-        /* WFM Charts */
-        .wfm-metric { text-align: center; padding: 20px; }
-        .circle-chart { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(var(--success) 0% 85%, #eee 85% 100%); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; }
-        .inner-circle { width: 80px; height: 80px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
-
-        /* Reception Agent */
-        .call-log-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #f0f0f0; align-items: center; }
-        .sentiment-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; }
-        .sentiment-pos { background: #d4edda; color: #155724; }
-        .sentiment-neg { background: #f8d7da; color: #721c24; }
-
-        /* HR & Dashboard (Existing) */
+        /* Attendance Widget */
+        .attendance-widget { text-align: center; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; }
         .clock-display { font-size: 2.2rem; font-weight: 700; color: #1abc9c; margin: 10px 0; }
-        .attendance-widget { text-align: center; display: flex; flex-direction: column; justify-content: center; height: 100%; }
-        .whos-off-item, .approval-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+        .ip-text { font-size: 0.8rem; color: #999; margin-bottom: 15px; }
+        .btn-clock-in { background-color: #2980b9; color: white; width: 100%; padding: 10px; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; }
+
+        /* Who's Off */
+        .whos-off-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+        .whos-off-item:last-child { border-bottom: none; }
         .avatar-circle { width: 35px; height: 35px; border-radius: 50%; background: #e3f2fd; color: #2980b9; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: bold; margin-right: 12px; }
-        
+        html[dir="rtl"] .avatar-circle { margin-right: 0; margin-left: 12px; }
+        .wo-info h4 { font-size: 0.9rem; margin: 0; font-weight: 600; }
+        .wo-info p { font-size: 0.75rem; color: #777; margin: 2px 0 0 0; }
+        .status-badge { background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-left: auto; }
+        html[dir="rtl"] .status-badge { margin-left: 0; margin-right: auto; }
+
+        /* Approvals */
+        .approval-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f5f5f5; }
+        .approval-actions { display: flex; gap: 5px; }
+        .btn-icon-sq { width: 30px; height: 30px; border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; cursor: pointer; background: white; }
+        .btn-approve { color: var(--success); border-color: var(--success); }
+        .btn-reject { color: var(--danger); border-color: var(--danger); }
+
+        /* Stats Row */
+        .stat-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .stat-val-green { color: var(--success); font-weight: 700; }
+        .interview-list { margin-top: 15px; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+        .interview-item { font-size: 0.85rem; margin-bottom: 8px; color: #333; }
+        .interview-time { font-weight: 700; }
+        .text-muted-small { color: #888; font-size: 0.8rem; }
+
+        /* Payroll */
+        .compliant-badge { color: var(--success); font-weight: 600; display: flex; align-items: center; gap: 5px; }
+        .chart-placeholder { background: #f9fafb; height: 80px; margin-top: 15px; border-radius: 4px; display: flex; align-items: center; justify-content: center; color: #ccc; font-size: 0.8rem; border: 1px dashed #ddd; }
+
+        /* Buttons */
+        .btn-outline { background-color: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
+
+        /* Responsive */
         @media (max-width: 1024px) {
-            .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-            .mail-list { display: none; } /* Simplified for mobile */
+            .dashboard-grid, .dashboard-grid-bottom { grid-template-columns: 1fr; }
+            .grid-span-2 { grid-column: span 1; }
+        }
+        @media (max-width: 768px) {
+            .sidebar { position: absolute; left: -260px; height: 100%; z-index: 1000; }
+            .sidebar.active { left: 0; }
+            html[dir="rtl"] .sidebar { left: auto; right: -260px; }
+            html[dir="rtl"] .sidebar.active { right: 0; }
+            .branding-logos { display: none; }
         }
     </style>
 </head>
@@ -131,17 +249,21 @@
             
             <div class="header-right">
                 <div class="user-controls">
-                    <select id="role-select" class="btn-outline" onchange="renderApp()">
+                    <select id="role-select" class="btn-outline" onchange="changeRole()">
                         <option value="admin">Admin</option>
                         <option value="employee">Agent</option>
                     </select>
-                    <button class="btn-outline" id="lang-btn">عربي</button>
-                    <i class="fa-regular fa-bell icon-btn"><span class="badge">5</span></i>
+
+                    <button class="btn-outline" onclick="toggleLang()" id="lang-btn">عربي</button>
+                    
+                    <i class="fa-regular fa-bell icon-btn"><span class="badge">2</span></i>
+                    
                     <div class="dropdown">
-                        <img src="https://ui-avatars.com/api/?name=Sarah+Connor&background=2980b9&color=fff" alt="User">
+                        <img src="https://ui-avatars.com/api/?name=Sarah+Connor&background=2980b9&color=fff" alt="User" id="user-avatar">
                         <span id="user-name">Sarah Connor</span>
                     </div>
                 </div>
+
                 <div class="branding-logos">
                     <img src="ltslogo.jpg" alt="LTS Logo" class="primary-logo">
                     <img src="cropped-solid-logo-.png" alt="Digitivia Logo" class="secondary-logo">
@@ -154,396 +276,346 @@
     </div>
 
     <script>
-        // State
-        let activeTab = 'dashboard';
-        const role = 'admin';
+        // --- DATA & CONFIG ---
+        
+        const state = {
+            role: 'admin', 
+            lang: 'en'     
+        };
 
-        const tabs = [
-            { id: 'hr_header', type: 'header', label: 'HR & Recruitment' },
-            { id: 'dashboard', icon: 'fa-chart-pie', label: 'Dashboard' },
-            { id: 'payroll', icon: 'fa-money-bill-wave', label: 'Payroll' },
-            { id: 'employees', icon: 'fa-users', label: 'Employees' },
-            { id: 'attendance', icon: 'fa-clock', label: 'Time & Attendance' },
-            { id: 'ats', icon: 'fa-briefcase', label: 'ATS (Recruitment)' },
-            { id: 'performance', icon: 'fa-star', label: 'Performance' },
-            { id: 'reports', icon: 'fa-file-alt', label: 'Reports' },
-            
-            { id: 'ai_header', type: 'header', label: 'AI Modules' },
-            { id: 'social', icon: 'fa-share-nodes', label: 'Social Media AI' },
-            { id: 'qa', icon: 'fa-robot', label: 'QA AI' },
-            { id: 'mail', icon: 'fa-envelope-open-text', label: 'Mail Agent' },
-            { id: 'reception', icon: 'fa-headset', label: 'Reception Agent' },
-            { id: 'designs', icon: 'fa-palette', label: 'POST Designs' },
-            
-            { id: 'ops_header', type: 'header', label: 'Operations' },
-            { id: 'wfm', icon: 'fa-timeline', label: 'Workforce (WFM)' },
-        ];
+        // Translations
+        const i18n = {
+            en: {
+                welcome: "Welcome back,",
+                roleAdmin: "HR Admin",
+                roleEmp: "Agent",
+                
+                // Sidebar Sections
+                sec_core: "AI Modules",
+                sec_ops: "Operations",
+                sec_hr: "HR & Recruitment",
 
-        // Initialization
-        function init() {
-            document.getElementById('current-date').innerText = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-            renderSidebar();
-            renderApp();
-            
-            // Live Clock
-            setInterval(() => {
-                const el = document.getElementById('clock');
-                if(el) el.innerText = new Date().toLocaleTimeString();
-            }, 1000);
-        }
+                // Modules
+                dashboard: "Dashboard",
+                socialAI: "Social Media AI",
+                qaAI: "QA AI",
+                mailAgent: "Mail Agent",
+                receptionAgent: "Reception Agent",
+                wfm: "Workforce (WFM)",
+                postDesigns: "POST Designs",
+                
+                // HR Legacy
+                zenats: "ATS (Recruitment)",
+                payroll: "Payroll",
+                employees: "Employees",
+                attendance: "Time & Attendance",
+                performance: "Performance",
+                reports: "Reports",
 
-        // Render Sidebar
+                // Dashboard Widgets
+                myAttendance: "My Attendance",
+                clockIn: "Clock In",
+                whosOff: "Who's Off Today",
+                viewAll: "View All",
+                pendingApprovals: "Pending Approvals",
+                activeJobs: "Active Jobs",
+                newCandidates: "New Candidates",
+                upcomingInterviews: "Upcoming Interviews",
+                wpsStatus: "WPS Status",
+                compliant: "Compliant"
+            },
+            ar: {
+                welcome: "مرحباً بعودتك،",
+                roleAdmin: "مدير الموارد البشرية",
+                roleEmp: "موظف",
+                
+                sec_core: "وحدات الذكاء الاصطناعي",
+                sec_ops: "العمليات",
+                sec_hr: "الموارد البشرية",
+
+                dashboard: "لوحة التحكم",
+                socialAI: "تحليل التواصل الاجتماعي",
+                qaAI: "ضمان الجودة (AI)",
+                mailAgent: "عميل البريد الإلكتروني",
+                receptionAgent: "موظف الاستقبال الآلي",
+                wfm: "إدارة القوى العاملة (WFM)",
+                postDesigns: "تصاميم المنشورات",
+                
+                zenats: "نظام التوظيف (ATS)",
+                payroll: "مسير الرواتب",
+                employees: "الموظفين",
+                attendance: "الحضور والانصراف",
+                performance: "الأداء",
+                reports: "التقارير",
+
+                myAttendance: "حضوري",
+                clockIn: "تسجيل الدخول",
+                whosOff: "المجازين اليوم",
+                viewAll: "عرض الكل",
+                pendingApprovals: "الموافقات المعلقة",
+                activeJobs: "وظائف نشطة",
+                newCandidates: "مرشحين جدد",
+                upcomingInterviews: "المقابلات القادمة",
+                wpsStatus: "حالة حماية الأجور",
+                compliant: "متوافق"
+            }
+        };
+
+        // --- RENDER FUNCTIONS ---
+
         function renderSidebar() {
-            const nav = document.getElementById('nav-container');
-            nav.innerHTML = '';
+            const t = i18n[state.lang];
+            const navContainer = document.getElementById('nav-container');
+            navContainer.innerHTML = '';
+
+            let sections = [];
             
-            tabs.forEach(item => {
-                if(item.type === 'header') {
-                    const div = document.createElement('div');
-                    div.className = 'nav-header';
-                    div.innerText = item.label;
-                    nav.appendChild(div);
-                } else {
+            if (state.role === 'admin') {
+                sections = [
+                    {
+                        title: t.sec_hr, // HR & Recruitment FIRST
+                        items: [
+                            { icon: 'fa-chart-pie', label: t.dashboard, active: true },
+                            { icon: 'fa-money-bill-wave', label: t.payroll },
+                            { icon: 'fa-users', label: t.employees },
+                            { icon: 'fa-clock', label: t.attendance },
+                            { icon: 'fa-briefcase', label: t.zenats },
+                            { icon: 'fa-star', label: t.performance },
+                            { icon: 'fa-file-alt', label: t.reports }
+                        ]
+                    },
+                    {
+                        title: t.sec_core, // AI Modules
+                        items: [
+                            { icon: 'fa-share-nodes', label: t.socialAI },
+                            { icon: 'fa-robot', label: t.qaAI },
+                            { icon: 'fa-envelope-open-text', label: t.mailAgent },
+                            { icon: 'fa-headset', label: t.receptionAgent },
+                            { icon: 'fa-palette', label: t.postDesigns },
+                        ]
+                    },
+                    {
+                        title: t.sec_ops, // Operations
+                        items: [
+                            { icon: 'fa-timeline', label: t.wfm },
+                        ]
+                    }
+                ];
+            } else {
+                // Agent View
+                sections = [
+                    {
+                        title: "Agent Tools",
+                        items: [
+                            { icon: 'fa-home', label: t.dashboard, active: true },
+                            { icon: 'fa-calendar', label: "My Schedule" },
+                            { icon: 'fa-envelope', label: "My Emails" }
+                        ]
+                    }
+                ];
+            }
+
+            sections.forEach(sec => {
+                if(sec.title) {
+                    const header = document.createElement('div');
+                    header.className = 'nav-header';
+                    header.innerText = sec.title;
+                    navContainer.appendChild(header);
+                }
+                const ul = document.createElement('ul');
+                ul.className = 'nav-links';
+                
+                sec.items.forEach(item => {
                     const li = document.createElement('li');
-                    li.className = `nav-item ${activeTab === item.id ? 'active' : ''}`;
+                    li.className = `nav-item ${item.active ? 'active' : ''}`;
                     li.innerHTML = `<i class="fa-solid ${item.icon}"></i> <span>${item.label}</span>`;
                     li.onclick = () => {
-                        activeTab = item.id;
-                        renderSidebar(); // Re-render to update active class
-                        renderApp();     // Render main content
+                        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+                        li.classList.add('active');
                     };
-                    nav.appendChild(li);
-                }
+                    ul.appendChild(li);
+                });
+                navContainer.appendChild(ul);
             });
         }
 
-        // Main Router
-        function renderApp() {
+        function renderDashboard() {
+            const t = i18n[state.lang];
             const main = document.getElementById('main-view');
-            main.innerHTML = '';
+            const userName = document.getElementById('user-name').innerText;
+            
+            let html = `
+                <div class="page-title">
+                    ${t.welcome} ${userName}
+                    <div style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; margin-top: 5px;">
+                        ${state.role === 'admin' ? t.roleAdmin : t.roleEmp} - ${new Date().toDateString()}
+                    </div>
+                </div>
+            `;
 
-            switch(activeTab) {
-                case 'dashboard': renderDashboard(main); break;
-                case 'payroll': renderPayroll(main); break;
-                case 'social': renderSocialAI(main); break;
-                case 'mail': renderMailAgent(main); break;
-                case 'designs': renderPostDesigns(main); break;
-                case 'wfm': renderWFM(main); break;
-                case 'reception': renderReception(main); break;
-                case 'ats': renderATS(main); break;
-                case 'attendance': renderAttendance(main); break;
-                default: main.innerHTML = `<div class="card"><div class="card-body"><h3>${activeTab.toUpperCase()}</h3><p>Module under development.</p></div></div>`;
-            }
-        }
-
-        // --- 1. DASHBOARD (Matches PDF & Image) ---
-        function renderDashboard(container) {
-            container.innerHTML = `
-                <div class="page-title">Welcome back, Sarah Connor</div>
+            if (state.role === 'admin') {
+                html += `
                 <div class="dashboard-grid">
+                    
                     <section class="card">
                         <div class="attendance-widget">
-                            <div class="card-title">My Attendance</div>
-                            <div class="clock-display" id="clock">--:--:--</div>
+                            <div class="card-title">${t.myAttendance}</div>
+                            <div class="clock-display" id="clock">12:43:34</div>
                             <div class="ip-text"><i class="fa-solid fa-location-dot"></i> Amman Office (IP: 192.168.1.1)</div>
-                            <button class="btn-primary" style="width:80%; margin-top:10px;">Clock In</button>
+                            <button class="btn-clock-in">${t.clockIn}</button>
                         </div>
                     </section>
+
                     <section class="card">
                         <div class="card-header">
-                            <div class="card-title">Who's Off Today</div>
-                            <a href="#" class="card-action">View All</a>
+                            <div class="card-title">${t.whosOff}</div>
+                            <a href="#" class="card-action">${t.viewAll}</a>
                         </div>
-                        ${['Ahmed Ali (Sick)', 'Lina Basem (Remote)'].map(p => `
-                            <div class="whos-off-item">
-                                <div class="avatar-circle">${p.charAt(0)}</div>
-                                <div><div style="font-weight:600; font-size:0.9rem">${p.split('(')[0]}</div><div style="font-size:0.75rem; color:#777">${p.split('(')[1].replace(')', '')}</div></div>
-                                <span style="margin-left:auto; background:#e8f5e9; color:#2e7d32; padding:2px 6px; border-radius:4px; font-size:0.7rem">Today</span>
+                        <div class="whos-off-item">
+                            <div class="avatar-circle">AA</div>
+                            <div class="wo-info">
+                                <h4>Ahmed Ali</h4>
+                                <p>Sick Leave</p>
                             </div>
-                        `).join('')}
+                            <div class="status-badge" style="background:#e8f5e9; color:#2e7d32">Today</div>
+                        </div>
+                        <div class="whos-off-item">
+                            <div class="avatar-circle" style="background:#fff3e0; color:#ef6c00">LB</div>
+                            <div class="wo-info">
+                                <h4>Lina Basem</h4>
+                                <p>Remote Work</p>
+                            </div>
+                            <div class="status-badge" style="background:#e8f5e9; color:#2e7d32">Today</div>
+                        </div>
                     </section>
+
                     <section class="card">
-                        <div class="card-header"><div class="card-title">Pending Approvals</div><div class="badge" style="position:static; background:var(--warning)">2</div></div>
+                        <div class="card-header">
+                            <div class="card-title">${t.pendingApprovals}</div>
+                            <div class="badge" style="position:static; background:var(--warning)">2</div>
+                        </div>
                         <div class="approval-item">
-                            <div><div style="font-weight:600; font-size:0.9rem">John Doe</div><div style="font-size:0.75rem; color:#777">Leave Request</div></div>
-                            <div style="margin-left:auto; display:flex; gap:5px;">
-                                <button class="btn-outline" style="border-color:var(--success); color:var(--success)"><i class="fa-solid fa-check"></i></button>
-                                <button class="btn-outline" style="border-color:var(--danger); color:var(--danger)"><i class="fa-solid fa-xmark"></i></button>
+                            <div class="wo-info">
+                                <h4>John Doe</h4>
+                                <p>Leave Request</p>
+                            </div>
+                            <div class="approval-actions">
+                                <div class="btn-icon-sq btn-approve"><i class="fa-solid fa-check"></i></div>
+                                <div class="btn-icon-sq btn-reject"><i class="fa-solid fa-xmark"></i></div>
+                            </div>
+                        </div>
+                        <div class="approval-item">
+                            <div class="wo-info">
+                                <h4>Sarah Smith</h4>
+                                <p>Expense Claim</p>
+                            </div>
+                            <div class="approval-actions">
+                                <div class="btn-icon-sq btn-approve"><i class="fa-solid fa-check"></i></div>
+                                <div class="btn-icon-sq btn-reject"><i class="fa-solid fa-xmark"></i></div>
                             </div>
                         </div>
                     </section>
                 </div>
-                <div class="dashboard-grid">
+
+                <div class="dashboard-grid-bottom">
+                    
+                    <section class="card"> 
+                        <div class="card-header">
+                            <div class="card-title">${t.zenats}</div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">${t.activeJobs}</span>
+                            <span class="stat-value">4</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">${t.newCandidates}</span>
+                            <span class="stat-val-green">+12</span>
+                        </div>
+                        
+                        <div class="interview-list">
+                            <div class="text-muted-small" style="margin-bottom:8px;">${t.upcomingInterviews}</div>
+                            <div class="interview-item">
+                                <span class="interview-time">10:00 AM</span> - Mohammad K. <span class="text-muted-small">(Senior Java Dev)</span>
+                            </div>
+                            <div class="interview-item">
+                                <span class="interview-time">02:00 PM</span> - Nour H. <span class="text-muted-small">(HR Specialist)</span>
+                            </div>
+                        </div>
+                    </section>
+
                     <section class="card">
-                        <div class="card-header"><div class="card-title">ATS (Recruitment)</div></div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:10px"><span>Active Jobs</span><strong>4</strong></div>
-                        <div style="display:flex; justify-content:space-between; margin-bottom:15px"><span>New Candidates</span><strong style="color:var(--success)">+12</strong></div>
-                        <div style="border-top:1px solid #eee; padding-top:10px">
-                            <div style="font-size:0.8rem; color:#777; margin-bottom:5px">Upcoming Interviews</div>
-                            <div style="font-size:0.85rem"><strong>10:00 AM</strong> - M. Khalil (Java Dev)</div>
+                        <div class="card-header">
+                            <div class="card-title">${t.payroll}</div>
+                        </div>
+                        <div style="margin-bottom:5px; font-size:0.9rem; color:#777;">${t.wpsStatus}</div>
+                        <div class="compliant-badge">
+                            <i class="fa-solid fa-circle-check"></i> ${t.compliant}
+                        </div>
+                        <div class="chart-placeholder">
+                            [Chart Visualization Placeholder]
                         </div>
                     </section>
-                    <section class="card">
-                        <div class="card-header"><div class="card-title">Payroll</div></div>
-                        <div style="color:var(--success); font-weight:600; margin-bottom:10px"><i class="fa-solid fa-circle-check"></i> WPS Compliant</div>
-                        <div style="background:#f9f9f9; height:80px; border-radius:4px; display:flex; align-items:center; justify-content:center; color:#ccc; border:1px dashed #ddd">[Salary Chart Placeholder]</div>
+                    
+                    <section class="card" style="border:1px dashed #e0e0e0; display:flex; align-items:center; justify-content:center; color:#ccc;">
+                        Add Widget
                     </section>
+
                 </div>
-            `;
+                `;
+            } else {
+                html += `<div style="padding:20px; color:#666;">Agent Dashboard View Loaded...</div>`;
+            }
+
+            main.innerHTML = html;
         }
 
-        // --- 2. SOCIAL MEDIA AI ---
-        function renderSocialAI(container) {
-            container.innerHTML = `
-                <div class="page-title">
-                    Social Media AI
-                    <button class="btn-primary" onclick="alert('Connecting to Meta/X API...')"><i class="fa-solid fa-plug"></i> Connect Account</button>
-                </div>
-                <div class="social-grid">
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Live Insights (Engagement)</div></div>
-                        <div class="chart-bar-container">
-                            <div class="chart-bar" style="height: 40%"></div>
-                            <div class="chart-bar" style="height: 70%"></div>
-                            <div class="chart-bar" style="height: 50%"></div>
-                            <div class="chart-bar" style="height: 90%"></div>
-                            <div class="chart-bar" style="height: 60%"></div>
-                            <div class="chart-bar" style="height: 80%"></div>
-                            <div class="chart-bar" style="height: 45%"></div>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; margin-top:10px; font-size:0.8rem; color:#777">
-                            <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Sentiment</div></div>
-                        <div style="text-align:center; padding:20px;">
-                            <div style="font-size:3rem; font-weight:bold; color:var(--success)">88%</div>
-                            <div>Positive</div>
-                            <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
-                            <div style="font-size:0.9rem; text-align:left;">
-                                <div><i class="fa-brands fa-twitter" style="color:#1da1f2"></i> Twitter: +12%</div>
-                                <div style="margin-top:5px"><i class="fa-brands fa-linkedin" style="color:#0077b5"></i> LinkedIn: +5%</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
+        // --- ACTIONS ---
+
+        function changeRole() {
+            const select = document.getElementById('role-select');
+            state.role = select.value;
+            renderSidebar();
+            renderDashboard();
         }
 
-        // --- 3. MAIL AGENT (Gmail Style) ---
-        function renderMailAgent(container) {
-            container.innerHTML = `
-                <div class="page-title">Mail Agent</div>
-                <div class="mail-layout">
-                    <div class="mail-sidebar">
-                        <button class="mail-compose-btn"><i class="fa-solid fa-pen"></i> Compose</button>
-                        <div class="mail-item active"><i class="fa-solid fa-inbox"></i> Inbox (4)</div>
-                        <div class="mail-item"><i class="fa-regular fa-paper-plane"></i> Sent</div>
-                        <div class="mail-item"><i class="fa-regular fa-star"></i> Starred</div>
-                        <div class="mail-item"><i class="fa-solid fa-robot"></i> AI Drafts</div>
-                    </div>
-                    <div class="mail-list">
-                        ${[1,2,3,4].map(i => `
-                            <div class="mail-item" onclick="document.getElementById('mail-content-view').innerHTML = '<h3>Subject ${i}</h3><p>From: Client ${i}</p><hr><p>This is the content of email ${i}. The AI suggests a quick reply.</p><br><button class=\\'btn-outline\\'>AI Reply</button>'">
-                                <div style="font-weight:600">Client Name ${i}</div>
-                                <div style="font-size:0.85rem; color:#333">Project Update Request...</div>
-                                <div style="font-size:0.7rem; color:#999">10:3${i} AM</div>
-                            </div>
-                        `).join('')}
-                    </div>
-                    <div class="mail-view" id="mail-content-view">
-                        <div style="color:#777; text-align:center; margin-top:50px;">Select an email to read</div>
-                    </div>
-                </div>
-            `;
+        function toggleLang() {
+            state.lang = state.lang === 'en' ? 'ar' : 'en';
+            const html = document.documentElement;
+            const langBtn = document.getElementById('lang-btn');
+            
+            if (state.lang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                langBtn.innerText = "English";
+                document.body.style.fontFamily = "Tahoma, sans-serif"; 
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'en');
+                langBtn.innerText = "عربي";
+                document.body.style.fontFamily = "'Inter', sans-serif";
+            }
+            
+            renderSidebar();
+            renderDashboard();
         }
 
-        // --- 4. WFM (Workforce) ---
-        function renderWFM(container) {
-            container.innerHTML = `
-                <div class="page-title">Workforce Management</div>
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Schedule Adherence</div></div>
-                        <div class="wfm-metric">
-                            <div class="circle-chart" style="background: conic-gradient(#27ae60 0% 92%, #eee 92% 100%);">
-                                <div class="inner-circle">92%</div>
-                            </div>
-                            <p>Teams are following the roster effectively.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Productivity</div></div>
-                        <div class="wfm-metric">
-                            <div class="circle-chart" style="background: conic-gradient(#2980b9 0% 78%, #eee 78% 100%);">
-                                <div class="inner-circle">78%</div>
-                            </div>
-                            <p>Active hours vs. Available hours.</p>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Service Level</div></div>
-                        <div class="wfm-metric">
-                            <div class="circle-chart" style="background: conic-gradient(#f39c12 0% 85%, #eee 85% 100%);">
-                                <div class="inner-circle">85%</div>
-                            </div>
-                            <p>Calls answered within 20 seconds.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="card" style="margin-top:20px;">
-                    <div class="card-header"><div class="card-title">Shift Roster (Today)</div></div>
-                    <div style="overflow-x:auto; padding:20px;">
-                        <table style="width:100%; border-collapse:collapse;">
-                            <tr style="background:#f9f9f9; text-align:left;">
-                                <th style="padding:10px;">Agent</th>
-                                <th>Shift Start</th>
-                                <th>Shift End</th>
-                                <th>Status</th>
-                            </tr>
-                            <tr><td style="padding:10px;">Sarah Connor</td><td>09:00 AM</td><td>05:00 PM</td><td style="color:green">Active</td></tr>
-                            <tr><td style="padding:10px;">John Smith</td><td>09:00 AM</td><td>05:00 PM</td><td style="color:orange">Break</td></tr>
-                        </table>
-                    </div>
-                </div>
-            `;
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
         }
 
-        // --- 5. POST DESIGNS ---
-        function renderPostDesigns(container) {
-            container.innerHTML = `
-                <div class="page-title">
-                    POST Designs
-                    <button class="btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Create New</button>
-                </div>
-                <div class="post-grid">
-                    ${[1, 2, 3, 4, 5, 6].map(i => `
-                        <div class="post-card">
-                            <div class="post-img"><i class="fa-regular fa-image fa-2x"></i></div>
-                            <div class="post-body">
-                                <span class="ai-badge"><i class="fa-solid fa-robot"></i> AI Gen</span>
-                                <h4 style="margin: 5px 0; font-size:0.95rem;">Campaign #10${i}</h4>
-                                <p style="font-size:0.8rem; color:#666; margin-bottom:10px;">"Unlock your potential with our new..."</p>
-                                <div style="display:flex; justify-content:space-between; font-size:0.8rem; color:#aaa;">
-                                    <span><i class="fa-regular fa-eye"></i> 1.2k</span>
-                                    <span><i class="fa-regular fa-heart"></i> 340</span>
-                                </div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
+        // Clock Ticker
+        setInterval(() => {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            const clockEl = document.getElementById('clock');
+            if(clockEl) clockEl.innerText = timeString;
+        }, 1000);
 
-        // --- 6. RECEPTION AGENT ---
-        function renderReception(container) {
-            container.innerHTML = `
-                <div class="page-title">
-                    Reception Agent
-                    <button class="btn-primary"><i class="fa-solid fa-phone"></i> Create Call</button>
-                </div>
-                <div class="dashboard-grid">
-                    <div class="card grid-span-2">
-                        <div class="card-header"><div class="card-title">Live Call Analysis</div></div>
-                        <div class="call-log-item">
-                            <div>
-                                <strong>+962 79 000 0000</strong>
-                                <div style="font-size:0.8rem; color:#777">Duration: 02:14 • Agent: AI Bot 1</div>
-                            </div>
-                            <div class="sentiment-badge sentiment-pos">Satisfied</div>
-                        </div>
-                        <div class="call-log-item">
-                            <div>
-                                <strong>+962 77 111 2222</strong>
-                                <div style="font-size:0.8rem; color:#777">Duration: 05:40 • Agent: Human Handoff</div>
-                            </div>
-                            <div class="sentiment-badge sentiment-neg">Frustrated</div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Dialer</div></div>
-                        <input type="text" placeholder="Enter number..." style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:4px;">
-                        <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:10px;">
-                            ${[1,2,3,4,5,6,7,8,9,'*',0,'#'].map(n => `<button class="btn-outline" style="padding:15px;">${n}</button>`).join('')}
-                        </div>
-                        <button class="btn-primary" style="width:100%; background:var(--success)"><i class="fa-solid fa-phone"></i> Call</button>
-                    </div>
-                </div>
-            `;
-        }
+        // Init
+        document.getElementById('current-date').innerText = new Date().toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        renderSidebar();
+        renderDashboard();
 
-        // --- 7. PAYROLL (Based on PDF) ---
-        function renderPayroll(container) {
-            container.innerHTML = `
-                <div class="page-title">Payroll & WPS</div>
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Provisions Calculator</div></div>
-                        <div style="display:flex; flex-direction:column; gap:10px;">
-                            <label style="font-size:0.85rem">Provisions Month</label>
-                            <input type="month" class="btn-outline" value="2025-12" style="width:100%">
-                            <button class="btn-primary" style="margin-top:10px;">Calculate</button>
-                        </div>
-                    </div>
-                    <div class="card grid-span-2">
-                        <div class="card-header"><div class="card-title">Active Loans</div></div>
-                        <table style="width:100%; font-size:0.9rem;">
-                            <tr style="border-bottom:1px solid #eee; text-align:left"><th style="padding:5px">Employee</th><th>Amount</th><th>Remaining</th></tr>
-                            <tr><td style="padding:5px">Nour Ahmad</td><td>5,000 SAR</td><td>2,000 SAR</td></tr>
-                            <tr><td style="padding:5px">Masoud K.</td><td>10,000 SAR</td><td>8,500 SAR</td></tr>
-                        </table>
-                    </div>
-                </div>
-            `;
-        }
-
-        // --- 8. ATS (Recruitment Pipeline) ---
-        function renderATS(container) {
-            container.innerHTML = `
-                <div class="page-title">Recruitment Pipeline</div>
-                <div style="display:flex; gap:15px; overflow-x:auto; padding-bottom:10px;">
-                    ${['Sourced (10)', 'Screening (5)', 'Interview (3)', 'Offer (1)'].map(stage => `
-                        <div style="min-width:250px; background:#f4f5f7; padding:10px; border-radius:6px;">
-                            <div style="font-weight:600; margin-bottom:10px; color:#555">${stage}</div>
-                            <div class="card" style="margin-bottom:10px; padding:10px; cursor:pointer;">
-                                <div style="font-weight:600">Candidate Name</div>
-                                <div style="font-size:0.8rem; color:#777">Senior Dev</div>
-                                <div style="margin-top:5px;"><span class="ai-badge" style="float:none; font-size:0.6rem">AI Score: 95%</span></div>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        // --- 9. ATTENDANCE ---
-        function renderAttendance(container) {
-            container.innerHTML = `
-                <div class="page-title">Time & Attendance</div>
-                <div class="dashboard-grid">
-                    <div class="card">
-                        <div class="card-header"><div class="card-title">Missing Punches</div></div>
-                        <p style="font-size:0.85rem; color:#666; margin-bottom:15px;">Request a correction for missed clocks.</p>
-                        <button class="btn-outline" style="width:100%">+ Request</button>
-                    </div>
-                    <div class="card grid-span-2">
-                        <div class="card-header"><div class="card-title">Roster / Shift Plan</div></div>
-                        <div style="display:flex; gap:5px;">
-                            ${['Sun','Mon','Tue','Wed','Thu'].map(d => `
-                                <div style="flex:1; border:1px solid #eee; padding:10px; text-align:center; border-radius:4px;">
-                                    <div style="font-weight:bold; margin-bottom:5px;">${d}</div>
-                                    <div style="font-size:0.75rem; background:#e3f2fd; color:#2980b9; padding:4px; border-radius:3px;">09:00 - 17:00</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        // Initialize App
-        init();
     </script>
 </body>
 </html>
