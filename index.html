@@ -136,11 +136,33 @@
         .page-title { margin-bottom: 25px; font-size: 1.5rem; font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
         
         /* --- General UI Components --- */
-        .btn-primary { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; }
-        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-primary { background: var(--primary); color: #fff; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px; transition: 0.2s;}
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px);}
         .btn-primary:disabled { background: #95a5a6; cursor: not-allowed; }
-        .btn-outline { background-color: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; }
         
+        .btn-outline { background-color: transparent; border: 1px solid var(--border); color: var(--text-main); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: 0.2s; }
+        .btn-outline:hover { background: #f0f0f0; border-color: #ccc; }
+        
+        /* Back Button Style (Circle) */
+        .btn-back-circle {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .btn-back-circle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: scale(1.1);
+        }
+
         .card {
             background: #fff;
             border-radius: 8px;
@@ -157,7 +179,140 @@
         .grid-3 { grid-template-columns: repeat(3, 1fr); }
         .grid-span-2 { grid-column: span 2; }
         
-        /* --- Specific Module Styles --- */
+        /* --- AVATAR & DIGITAL WORKFORCE STYLES (New) --- */
+        .avatar-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            margin-bottom: 30px; 
+        }
+        
+        .avatar-card { 
+            background: #fff; 
+            border: 1px solid var(--border); 
+            border-radius: 12px; 
+            padding: 25px 15px; 
+            text-align: center; 
+            cursor: pointer; 
+            position: relative; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        
+        .avatar-card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+        
+        .avatar-card.selected { 
+            border: 2px solid var(--primary); 
+            background: #ebf5fb; /* Light Blue Tint */
+        }
+        
+        .avatar-card img { 
+            width: 120px; 
+            height: 120px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            object-position: top;
+            margin-bottom: 15px; 
+            border: 4px solid #fff; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+        
+        .avatar-card.selected img { 
+            border-color: var(--primary); 
+            transform: scale(1.05);
+        }
+        
+        .selection-indicator {
+            position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; border: 2px solid #ccc;
+            transition: 0.3s; display: flex; align-items: center; justify-content: center; background: #fff;
+        }
+        .avatar-card.selected .selection-indicator { 
+            background: var(--primary); 
+            border-color: var(--primary); 
+            color: white;
+        }
+        .avatar-card.selected .selection-indicator::after {
+            content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 12px;
+        }
+        
+        .avatar-role-badge {
+            background: #e8f5e9; color: var(--success); padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.5px;
+        }
+        
+        .avatar-name { font-weight: 700; color: var(--text-main); font-size: 1.2rem; margin-bottom: 5px; }
+        .avatar-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-top: 5px; }
+
+        /* Config Section */
+        .config-section {
+            background: #fff;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid var(--border);
+            margin-top: 20px;
+        }
+        .config-row { display: flex; align-items: center; margin-bottom: 25px; gap: 20px; }
+        .config-label { width: 140px; font-size: 0.95rem; font-weight: 600; color: var(--text-main); flex-shrink: 0; }
+        .slider-container { flex-grow: 1; }
+        
+        input[type=range] { 
+            width: 100%; height: 6px; 
+            background: #e0e0e0; 
+            border-radius: 5px; 
+            -webkit-appearance: none; 
+        }
+        input[type=range]::-webkit-slider-thumb { 
+            -webkit-appearance: none; 
+            width: 20px; height: 20px; 
+            background: var(--primary); 
+            border-radius: 50%; 
+            cursor: pointer; 
+            border: 2px solid #fff; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: -7px;
+        }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 6px; cursor: pointer; }
+        
+        .dialect-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+        .dialect-chip { 
+            padding: 8px 16px; 
+            background: #fff; 
+            border: 1px solid #dcdcdc; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            cursor: pointer; 
+            transition: 0.2s;
+            color: var(--text-muted);
+        }
+        .dialect-chip:hover { background: #f5f5f5; color: var(--text-main); }
+        .dialect-chip.active { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+            box-shadow: 0 2px 5px rgba(41, 128, 185, 0.3);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed; bottom: 30px; right: 30px;
+            background: #27ae60;
+            color: white; padding: 15px 25px; border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 10px;
+            transform: translateY(100px); transition: transform 0.3s ease;
+            z-index: 9999;
+        }
+        .toast.show { transform: translateY(0); }
+
+        /* --- Specific Module Styles (From previous code) --- */
 
         /* Mail Agent Styles (Gmail-like) */
         .mail-layout { display: flex; height: 100%; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
@@ -190,35 +345,23 @@
             background: #eee; 
             border-radius: 8px; 
             display: flex; 
-            flex-direction: column; /* Changed to column to stack image and text */
+            flex-direction: column; 
             align-items: center; 
-            justify-content: flex-start; /* Align to top */
+            justify-content: flex-start; 
             min-height: 400px; 
             position: relative; 
-            overflow-y: auto; /* Allow scrolling if caption is long */
+            overflow-y: auto; 
             padding: 10px;
         }
         .generated-img { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 4px; border: 1px solid #ddd; }
-        
-        /* Styles for the generated caption box */
         .caption-box {
-            width: 100%;
-            background: white;
-            padding: 15px;
-            margin-top: 15px;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #444;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            text-align: left;
+            width: 100%; background: white; padding: 15px; margin-top: 15px; border-radius: 6px;
+            border-left: 4px solid var(--primary); font-size: 0.9rem; line-height: 1.5; color: #444; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: left;
         }
-
         .ai-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; z-index: 10; }
         textarea, input[type="text"] { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; }
         
-        /* ATS Pipeline (Kanban-ish) */
+        /* ATS Pipeline */
         .pipeline-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
         .pipeline-col { min-width: 240px; background: #f8f9fa; border-radius: 6px; padding: 10px; border: 1px solid #eee; }
         .pipeline-header { font-weight: 600; margin-bottom: 10px; display: flex; justify-content: space-between; color: #555; }
@@ -250,6 +393,7 @@
             .mail-layout { flex-direction: column; }
             .mail-sidebar { width: 100%; display: flex; overflow-x: auto; }
             .mail-btn-compose { width: auto; margin-right: 15px; }
+            .avatar-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
             .sidebar { position: absolute; left: -260px; height: 100%; z-index: 1000; }
@@ -258,6 +402,8 @@
             html[dir="rtl"] .sidebar.active { right: 0; }
             .branding-logos { display: none; }
             .post-creator { flex-direction: column; }
+            .avatar-grid { grid-template-columns: 1fr; }
+            .config-row { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
     </style>
 </head>
@@ -305,6 +451,8 @@
 
         <main class="content-scroll" id="main-view">
             </main>
+            
+        <div id="toast" class="toast"><i class="fa-solid fa-circle-check"></i> <span>Configuration Saved!</span></div>
     </div>
 
     <script>
@@ -313,7 +461,8 @@
         const state = {
             role: 'admin', 
             lang: 'en',
-            activeView: 'dashboard'
+            activeView: 'dashboard',
+            selectedAvatar: 'Ali' // Default selection
         };
 
         // Translations & Labels
@@ -334,10 +483,11 @@
                 qaAI: "QA AI",
                 mailAgent: "Mail Agent",
                 receptionAgent: "Reception Agent",
+                digitalWorkforce: "Digital Workforce", // NEW
                 wfm: "Workforce (WFM)",
                 postDesigns: "Content Gen",
                 
-                // HR Legacy (ZenHR PDF Data)
+                // HR Legacy
                 zenats: "ATS (Recruitment)",
                 payroll: "Payroll",
                 employees: "Employees",
@@ -364,6 +514,7 @@
                 qaAI: "ضمان الجودة (AI)",
                 mailAgent: "عميل البريد الإلكتروني",
                 receptionAgent: "موظف الاستقبال الآلي",
+                digitalWorkforce: "القوى العاملة الرقمية", // NEW
                 wfm: "إدارة القوى العاملة (WFM)",
                 postDesigns: "إنشاء المحتوى",
                 
@@ -392,7 +543,7 @@
             if (state.role === 'admin') {
                 sections = [
                     {
-                        title: t.sec_hr, // Based on ZenHR Image
+                        title: t.sec_hr, 
                         items: [
                             { icon: 'fa-chart-pie', label: t.dashboard, key: 'dashboard' },
                             { icon: 'fa-money-bill-wave', label: t.payroll, key: 'payroll' },
@@ -407,9 +558,9 @@
                         title: t.sec_core, // AI Modules
                         items: [
                             { icon: 'fa-share-nodes', label: t.socialAI, key: 'socialAI' },
-                            // { icon: 'fa-robot', label: t.qaAI, key: 'qaAI' }, // Skipped as requested
                             { icon: 'fa-envelope-open-text', label: t.mailAgent, key: 'mailAgent' },
                             { icon: 'fa-headset', label: t.receptionAgent, key: 'receptionAgent' },
+                            { icon: 'fa-users-gear', label: t.digitalWorkforce, key: 'digitalWorkforce' }, // NEW ITEM
                             { icon: 'fa-palette', label: t.postDesigns, key: 'postDesigns' },
                         ]
                     },
@@ -442,6 +593,7 @@
                         state.activeView = item.key;
                         renderSidebar(); // Re-render to update active class
                         renderMainContent(); // Switch View
+                        if(window.innerWidth <= 768) toggleSidebar();
                     };
                     ul.appendChild(li);
                 });
@@ -455,7 +607,6 @@
             const main = document.getElementById('main-view');
             const t = i18n[state.lang];
             
-            // Basic Container
             let content = '';
 
             switch(state.activeView) {
@@ -486,6 +637,9 @@
                 case 'receptionAgent':
                     content = generateReceptionHTML();
                     break;
+                case 'digitalWorkforce': // NEW CASE
+                    content = generateDigitalWorkforceHTML();
+                    break;
                 case 'postDesigns':
                     content = generatePostDesignsHTML();
                     break;
@@ -499,7 +653,114 @@
             main.innerHTML = content;
         }
 
-        // --- VIEW GENERATORS ---
+        // --- NEW MODULE: DIGITAL WORKFORCE ---
+
+        function generateDigitalWorkforceHTML() {
+            return `
+                <div class="page-title">
+                    <div style="display:flex; align-items:center; gap:20px;">
+                        <div class="btn-back-circle" onclick="state.activeView='employees'; renderSidebar(); renderMainContent();">
+                             <i class="fa-solid fa-arrow-left"></i>
+                        </div>
+                        <div>AI Agents Configuration</div>
+                    </div>
+                    <div style="display:flex; gap:10px;">
+                        <button class="btn-primary" onclick="saveConfig()"><i class="fa-solid fa-floppy-disk"></i> Save Config</button>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-bottom:20px;">
+                    <div class="card-header">
+                        <div class="card-title"><i class="fa-solid fa-users-gear"></i> Digital Workforce Identities</div>
+                    </div>
+                    
+                    <div style="margin-bottom:30px; display:flex; gap:15px; flex-wrap:wrap;">
+                        <input type="text" placeholder="Search by agent name..." style="flex:1; min-width:200px;">
+                        <select class="btn-outline" style="min-width:150px; background:#fff;">
+                            <option>All Roles</option>
+                            <option>Management</option>
+                            <option>Operations</option>
+                            <option>HR</option>
+                        </select>
+                    </div>
+
+                    <div class="avatar-grid">
+                        <div class="avatar-card ${state.selectedAvatar === 'Ali' ? 'selected' : ''}" onclick="selectAvatar(this, 'Ali')">
+                            <div class="selection-indicator"></div>
+                            <div class="avatar-role-badge">HR Manager</div>
+                            <img src="https://img.freepik.com/free-photo/3d-cartoon-portrait-person-practicing-law-related-profession_23-2151419548.jpg?t=st=1767014570~exp=1767018170~hmac=7ed324bbb4dd31b2da164899cf5e19fe2c7f0bc25f35518f81b339acd3f81c64" alt="Ali">
+                            <div class="avatar-name">Ali</div>
+                            <div class="avatar-desc">Empathetic and clear. Specialized in policy explanation and employee wellbeing.</div>
+                        </div>
+                        
+                        <div class="avatar-card ${state.selectedAvatar === 'Omar' ? 'selected' : ''}" onclick="selectAvatar(this, 'Omar')">
+                            <div class="selection-indicator"></div>
+                            <div class="avatar-role-badge">Operations Manager</div>
+                            <img src="https://img.freepik.com/free-photo/3d-cartoon-portrait-person-practicing-law-related-profession_23-2151419536.jpg?t=st=1767013563~exp=1767017163~hmac=4ef5ac98c9de6d9c07f303f829f345ba055876f01826c0a56a68d08632bc585d" alt="Omar">
+                            <div class="avatar-name">Omar</div>
+                            <div class="avatar-desc">Efficient, direct, and data-driven. Best for daily standups and performance reports.</div>
+                        </div>
+                        
+                        <div class="avatar-card ${state.selectedAvatar === 'Sarah' ? 'selected' : ''}" onclick="selectAvatar(this, 'Sarah')">
+                            <div class="selection-indicator"></div>
+                            <div class="avatar-role-badge">Supervisor</div>
+                            <img src="https://img.freepik.com/free-photo/view-3d-woman-working-justice-law-field_23-2151228142.jpg?t=st=1767013476~exp=1767017076~hmac=4c9db740caafbf4ecf12fc92283bfa8fc94abd3be8fef6ad22afe7f19595229a" alt="Sarah">
+                            <div class="avatar-name">Sarah</div>
+                            <div class="avatar-desc">Supportive and localized. Uses regional dialects to connect better with the field team.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <div style="font-size:1.1rem; font-weight:700; color:var(--text-main); margin-bottom:20px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+                        Voice & Personality Settings
+                    </div>
+                    
+                    <div class="config-row">
+                        <div class="config-label">Dialect</div>
+                        <div class="dialect-chips">
+                            <div class="dialect-chip active" onclick="toggleChip(this)">Jordanian</div>
+                            <div class="dialect-chip" onclick="toggleChip(this)">Saudi (Najdi)</div>
+                            <div class="dialect-chip" onclick="toggleChip(this)">Egyptian</div>
+                            <div class="dialect-chip" onclick="toggleChip(this)">UAE</div>
+                            <div class="dialect-chip" onclick="toggleChip(this)">Formal Arabic</div>
+                            <div class="dialect-chip" onclick="toggleChip(this)">English (US)</div>
+                        </div>
+                    </div>
+
+                    <div class="config-row">
+                        <div class="config-label">Talking Speed</div>
+                        <div class="slider-container">
+                            <input type="range" min="0.5" max="2" step="0.1" value="1">
+                            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted); margin-top:5px;">
+                                <span>Slow</span>
+                                <span>Natural</span>
+                                <span>Fast</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-row">
+                        <div class="config-label">Tone Stability</div>
+                        <div class="slider-container">
+                            <input type="range" min="0" max="1" step="0.1" value="0.8">
+                            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:5px;">
+                                Higher stability ensures consistent emotional tone.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-row">
+                        <div class="config-label">Voice Sample</div>
+                        <button class="btn-outline" style="display:flex; align-items:center; gap:10px;" onclick="playSample(this)">
+                            <i class="fa-solid fa-play"></i> Play Preview
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // --- UPDATED VIEW GENERATORS ---
 
         function generateDashboardHTML() {
             const t = i18n[state.lang];
@@ -507,6 +768,21 @@
                 <div class="page-title">
                     <span>${t.welcome} <span id="dash-user">Sarah</span></span>
                 </div>
+                
+                <div class="dashboard-grid grid-3">
+                     <div class="card" onclick="state.activeView = 'digitalWorkforce'; renderSidebar(); renderMainContent();" style="cursor:pointer; border-left: 4px solid var(--info); background: #fdfaff;">
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <div class="card-title" style="color:var(--info)"><i class="fa-solid fa-robot"></i> Manage AI Agents</div>
+                            <i class="fa-solid fa-arrow-right" style="color:var(--info)"></i>
+                        </div>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;">Configure Avatars, Voice & Dialects</p>
+                    </div>
+                     <div class="card" style="border-left: 4px solid var(--warning); background: #fffbf0;">
+                        <div class="card-title" style="color:var(--warning)"><i class="fa-solid fa-envelope-open-text"></i> Mail Agent</div>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;">12 Unread Emails processed by AI</p>
+                    </div>
+                </div>
+
                 <div class="dashboard-grid grid-3">
                     <div class="card">
                         <div class="card-header"><div class="card-title"><i class="fa-solid fa-clock"></i> My Attendance</div></div>
@@ -580,6 +856,29 @@
                     Employees
                     <button class="btn-primary"><i class="fa-solid fa-plus"></i> Onboard New Hire</button>
                 </div>
+
+                <div class="card" style="margin-bottom:20px; border-left:4px solid var(--info); background: linear-gradient(90deg, #fbf7fd, #fff);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:15px;">
+                        <div>
+                            <div style="font-size:1.1rem; font-weight:700; color:var(--info); margin-bottom:5px;">
+                                <i class="fa-solid fa-robot"></i> Digital Workforce
+                            </div>
+                            <div style="color:var(--text-muted); font-size:0.9rem;">Manage your 3 active AI Agents (Ali, Omar, Sarah)</div>
+                        </div>
+                        
+                        <div style="display:flex; align-items:center; gap:15px;">
+                             <div style="display:flex; margin-right:10px;">
+                                <img src="https://img.freepik.com/free-photo/3d-cartoon-portrait-person-practicing-law-related-profession_23-2151419548.jpg?t=st=1767014570~exp=1767018170~hmac=7ed324bbb4dd31b2da164899cf5e19fe2c7f0bc25f35518f81b339acd3f81c64" style="width:35px; height:35px; border-radius:50%; border:2px solid #fff; object-fit:cover; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                                <img src="https://img.freepik.com/free-photo/3d-cartoon-portrait-person-practicing-law-related-profession_23-2151419536.jpg?t=st=1767013563~exp=1767017163~hmac=4ef5ac98c9de6d9c07f303f829f345ba055876f01826c0a56a68d08632bc585d" style="width:35px; height:35px; border-radius:50%; border:2px solid #fff; object-fit:cover; margin-left:-10px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                                <img src="https://img.freepik.com/free-photo/view-3d-woman-working-justice-law-field_23-2151228142.jpg?t=st=1767013476~exp=1767017076~hmac=4c9db740caafbf4ecf12fc92283bfa8fc94abd3be8fef6ad22afe7f19595229a" style="width:35px; height:35px; border-radius:50%; border:2px solid #fff; object-fit:cover; margin-left:-10px; box-shadow:0 2px 4px rgba(0,0,0,0.1);">
+                             </div>
+                             <button class="btn-outline" onclick="state.activeView = 'digitalWorkforce'; renderSidebar(); renderMainContent();" style="border-color:var(--info); color:var(--info);">
+                                Configure Agents
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="dashboard-grid grid-3">
                     <div class="card">
                         <div class="card-title"><i class="fa-solid fa-laptop"></i> Asset Management</div>
@@ -879,7 +1178,6 @@
             `;
         }
 
-        // --- MODIFIED CONTENT GEN FUNCTION ---
         function generatePostDesignsHTML() {
             return `
                  <div class="page-title">AI Content Gen</div>
@@ -927,7 +1225,6 @@
             `;
         }
 
-        // --- NEW FUNCTION TO CALL n8n WEBHOOK ---
         async function triggerContentGen() {
             const topicInput = document.getElementById('post-topic-input');
             const styleInput = document.getElementById('post-style-select');
@@ -971,7 +1268,7 @@
 
                 const data = await response.json();
 
-                // 3. Handle Response (Expecting "image_url" AND "generated_caption")
+                // 3. Handle Response
                 const imageUrl = data.image_url || data.output || data.image; 
                 const captionText = data.generated_caption || data.caption || "No caption generated.";
 
@@ -1063,6 +1360,34 @@
         }
 
         // --- ACTIONS & HELPERS ---
+        
+        function selectAvatar(element, name) {
+            document.querySelectorAll('.avatar-card').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            state.selectedAvatar = name;
+        }
+
+        function toggleChip(element) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.dialect-chip').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function playSample(btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Playing...';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+
+        function saveConfig() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
 
         function changeRole() {
             const select = document.getElementById('role-select');
