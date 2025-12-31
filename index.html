@@ -179,7 +179,7 @@
         .grid-3 { grid-template-columns: repeat(3, 1fr); }
         .grid-span-2 { grid-column: span 2; }
         
-        /* --- AVATAR & DIGITAL WORKFORCE STYLES (New) --- */
+        /* --- AVATAR & DIGITAL WORKFORCE STYLES --- */
         .avatar-grid { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
@@ -312,7 +312,7 @@
         }
         .toast.show { transform: translateY(0); }
 
-        /* --- Specific Module Styles (From previous code) --- */
+        /* --- Specific Module Styles --- */
 
         /* Mail Agent Styles (Gmail-like) */
         .mail-layout { display: flex; height: 100%; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
@@ -337,9 +337,10 @@
         .wfm-bar.productivity { background: var(--info); }
         .wfm-label { font-size: 0.75rem; color: #777; }
 
-        /* Post Design */
+        /* Post Design & Social Preview */
         .post-creator { display: flex; gap: 20px; height: 100%; }
         .post-input { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+        
         .post-preview { 
             flex: 1; 
             background: #eee; 
@@ -351,16 +352,90 @@
             min-height: 400px; 
             position: relative; 
             overflow-y: auto; 
-            padding: 10px;
+            padding: 20px;
         }
-        .generated-img { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: 4px; border: 1px solid #ddd; }
-        .caption-box {
-            width: 100%; background: white; padding: 15px; margin-top: 15px; border-radius: 6px;
-            border-left: 4px solid var(--primary); font-size: 0.9rem; line-height: 1.5; color: #444; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: left;
+
+        /* Platform Switcher */
+        .platform-switch {
+            display: flex;
+            background: #fff;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 15px;
+            width: fit-content;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
-        .ai-badge { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; z-index: 10; }
+        .switch-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            display: flex; align-items: center; gap: 6px;
+            color: #777;
+            transition: 0.2s;
+        }
+        .switch-btn.active {
+            font-weight: 600;
+        }
+        .switch-btn.active.fb-mode { background: #e7f3ff; color: #1877f2; }
+        .switch-btn.active.li-mode { background: #eaf4fe; color: #0077b5; }
+
+        /* Social Preview Card Styles */
+        .social-preview-card {
+            background: #fff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            text-align: left; /* Reset text align */
+        }
+
+        .social-header { padding: 12px 16px; display: flex; align-items: flex-start; gap: 10px; }
+        .social-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+        
+        .social-meta h4 { font-size: 14px; margin: 0; color: #050505; font-weight: 600; }
+        .social-meta p { font-size: 12px; margin: 2px 0 0; color: #65676b; display: flex; align-items: center; gap: 4px;}
+        
+        .social-caption { padding: 0 16px 12px 16px; font-size: 14px; color: #050505; line-height: 1.4; white-space: pre-line; }
+        .generated-img { width: 100%; height: auto; display: block; object-fit: cover; }
+        
+        /* Social Footer (Likes/Comments) */
+        .social-footer { padding: 10px 16px; border-top: 1px solid #e0e0e0; display: flex; justify-content: space-around; }
+        .social-action { display: flex; align-items: center; gap: 6px; color: #65676b; font-size: 14px; font-weight: 600; cursor: pointer; }
+        
         textarea, input[type="text"] { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 4px; }
         
+        /* QA Analysis Section Styles */
+        .qa-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; height: 100%; }
+        .qa-input-area { display: flex; flex-direction: column; gap: 15px; }
+        .qa-result-area { 
+            background: #fff; border-left: 1px solid var(--border); padding: 20px; 
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .score-circle {
+            width: 120px; height: 120px; border-radius: 50%; 
+            background: conic-gradient(var(--primary) 0%, #eee 0);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto; position: relative;
+        }
+        .score-inner { 
+            width: 90px; height: 90px; background: #fff; border-radius: 50%; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .score-value { font-size: 1.8rem; font-weight: 700; color: var(--primary); }
+        .score-label { font-size: 0.7rem; color: #777; text-transform: uppercase; }
+
+        .metric-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 0.9rem; }
+        .metric-val { font-weight: 600; }
+        
+        .suggestion-list { list-style: none; margin-top: 10px; }
+        .suggestion-item { 
+            display: flex; gap: 10px; margin-bottom: 10px; font-size: 0.85rem; color: #555; 
+            background: #fff9fa; padding: 8px; border-radius: 4px; border-left: 3px solid var(--warning);
+        }
+
         /* ATS Pipeline */
         .pipeline-container { display: flex; gap: 15px; overflow-x: auto; padding-bottom: 10px; }
         .pipeline-col { min-width: 240px; background: #f8f9fa; border-radius: 6px; padding: 10px; border: 1px solid #eee; }
@@ -394,6 +469,7 @@
             .mail-sidebar { width: 100%; display: flex; overflow-x: auto; }
             .mail-btn-compose { width: auto; margin-right: 15px; }
             .avatar-grid { grid-template-columns: repeat(2, 1fr); }
+            .qa-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
             .sidebar { position: absolute; left: -260px; height: 100%; z-index: 1000; }
@@ -462,7 +538,9 @@
             role: 'admin', 
             lang: 'en',
             activeView: 'dashboard',
-            selectedAvatar: 'Ali' // Default selection
+            selectedAvatar: 'Ali', // Default selection
+            socialPreviewMode: 'facebook', // 'facebook' or 'linkedin'
+            lastGeneratedContent: null // Store generated content to re-render previews
         };
 
         // Translations & Labels
@@ -480,10 +558,10 @@
                 // Modules
                 dashboard: "Dashboard",
                 socialAI: "Social Media AI",
-                qaAI: "QA AI",
+                qaAI: "QA Analysis", // NEW
                 mailAgent: "Mail Agent",
                 receptionAgent: "Reception Agent",
-                digitalWorkforce: "Digital Workforce", // NEW
+                digitalWorkforce: "Digital Workforce",
                 wfm: "Workforce (WFM)",
                 postDesigns: "Content Gen",
                 
@@ -511,10 +589,10 @@
 
                 dashboard: "لوحة التحكم",
                 socialAI: "تحليل التواصل الاجتماعي",
-                qaAI: "ضمان الجودة (AI)",
+                qaAI: "تحليل الجودة (QA)", // NEW
                 mailAgent: "عميل البريد الإلكتروني",
                 receptionAgent: "موظف الاستقبال الآلي",
-                digitalWorkforce: "القوى العاملة الرقمية", // NEW
+                digitalWorkforce: "القوى العاملة الرقمية",
                 wfm: "إدارة القوى العاملة (WFM)",
                 postDesigns: "إنشاء المحتوى",
                 
@@ -560,7 +638,8 @@
                             { icon: 'fa-share-nodes', label: t.socialAI, key: 'socialAI' },
                             { icon: 'fa-envelope-open-text', label: t.mailAgent, key: 'mailAgent' },
                             { icon: 'fa-headset', label: t.receptionAgent, key: 'receptionAgent' },
-                            { icon: 'fa-users-gear', label: t.digitalWorkforce, key: 'digitalWorkforce' }, // NEW ITEM
+                            { icon: 'fa-file-shield', label: t.qaAI, key: 'qaAI' }, // NEW ITEM
+                            { icon: 'fa-users-gear', label: t.digitalWorkforce, key: 'digitalWorkforce' },
                             { icon: 'fa-palette', label: t.postDesigns, key: 'postDesigns' },
                         ]
                     },
@@ -631,13 +710,16 @@
                 case 'socialAI':
                     content = generateSocialAIHTML();
                     break;
+                case 'qaAI': // NEW CASE
+                    content = generateQaAIHTML();
+                    break;
                 case 'mailAgent':
                     content = generateMailAgentHTML();
                     break;
                 case 'receptionAgent':
                     content = generateReceptionHTML();
                     break;
-                case 'digitalWorkforce': // NEW CASE
+                case 'digitalWorkforce':
                     content = generateDigitalWorkforceHTML();
                     break;
                 case 'postDesigns':
@@ -651,10 +733,294 @@
             }
 
             main.innerHTML = content;
+            
+            // Post-render actions
+            if (state.activeView === 'postDesigns' && state.lastGeneratedContent) {
+                renderSocialPreview(state.lastGeneratedContent);
+            }
         }
 
-        // --- NEW MODULE: DIGITAL WORKFORCE ---
+        // --- NEW: QA ANALYSIS MODULE ---
+        function generateQaAIHTML() {
+            return `
+                <div class="page-title">
+                    QA Analysis (Email Quality)
+                    <button class="btn-outline" onclick="document.getElementById('qa-subject').value=''; document.getElementById('qa-body').value='';"><i class="fa-solid fa-rotate-left"></i> Reset</button>
+                </div>
+                
+                <div class="card qa-grid">
+                    <div class="qa-input-area">
+                        <div>
+                            <label style="font-weight:600; font-size:0.9rem; margin-bottom:5px; display:block;">Email Subject</label>
+                            <input type="text" id="qa-subject" placeholder="e.g. Important update regarding project deadline">
+                        </div>
+                        <div style="flex-grow:1; display:flex; flex-direction:column;">
+                            <label style="font-weight:600; font-size:0.9rem; margin-bottom:5px; display:block;">Email Body Content</label>
+                            <textarea id="qa-body" style="flex-grow:1; resize:none; padding:15px;" placeholder="Paste the email content here for analysis..."></textarea>
+                        </div>
+                        <button class="btn-primary" onclick="triggerQaAnalysis()" id="btn-qa-analyze" style="justify-content:center; padding:12px;">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Quality
+                        </button>
+                    </div>
 
+                    <div class="qa-result-area" id="qa-result-container">
+                        <div style="text-align:center; color:var(--text-muted); margin-top:50px;">
+                            <i class="fa-solid fa-chart-simple" style="font-size:3rem; margin-bottom:15px; color:#e0e0e0;"></i>
+                            <p>Enter email details and click Analyze to see quality metrics.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function triggerQaAnalysis() {
+            const subject = document.getElementById('qa-subject').value;
+            const body = document.getElementById('qa-body').value;
+            const container = document.getElementById('qa-result-container');
+            const btn = document.getElementById('btn-qa-analyze');
+
+            if(!subject || !body) {
+                alert("Please enter both subject and body.");
+                return;
+            }
+
+            // 1. Loading UI
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
+            container.innerHTML = `
+                <div style="text-align:center; margin-top:50px;">
+                    <i class="fa-solid fa-robot fa-bounce" style="font-size:2rem; color:var(--primary); margin-bottom:15px;"></i>
+                    <p>Sending data to AI...</p>
+                </div>
+            `;
+
+            try {
+                // 2. REAL WEBHOOK REQUEST
+                // PASTE YOUR NEW WEBHOOK URL HERE vvv
+                const webhookUrl = "https://n8n.srv1174105.hstgr.cloud/webhook/qaanalysis"; 
+
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        subject: subject,
+                        body: body
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Server Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                // 3. Render Results based on REAL data
+                // Note: Ensure your webhook returns keys: overall_score, tone, spam_likelihood, suggestions (array)
+                
+                const scoreColor = data.overall_score > 80 ? 'var(--success)' : (data.overall_score > 50 ? 'var(--warning)' : 'var(--danger)');
+                
+                container.innerHTML = `
+                    <div style="text-align:center; margin-bottom:20px;">
+                        <div class="score-circle" style="background: conic-gradient(${scoreColor} ${data.overall_score}%, #eee 0);">
+                            <div class="score-inner">
+                                <div class="score-value" style="color:${scoreColor}">${data.overall_score}</div>
+                                <div class="score-label">Quality Score</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="metric-row">
+                            <span style="color:#777">Detected Tone</span>
+                            <span class="metric-val" style="color:var(--primary)"><i class="fa-solid fa-tag"></i> ${data.tone}</span>
+                        </div>
+                        <div class="metric-row">
+                            <span style="color:#777">Spam Likelihood</span>
+                            <span class="metric-val" style="color:${data.spam_likelihood === 'Low' ? 'var(--success)' : 'var(--danger)'}">
+                                <i class="fa-solid fa-shield-halved"></i> ${data.spam_likelihood}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div style="font-weight:600; font-size:0.9rem; margin-bottom:10px;">AI Suggestions</div>
+                        <ul class="suggestion-list">
+                            ${data.suggestions ? data.suggestions.map(s => `<li class="suggestion-item"><i class="fa-solid fa-lightbulb" style="color:var(--warning)"></i> ${s}</li>`).join('') : '<li>No suggestions returned.</li>'}
+                        </ul>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = `
+                    <div style="text-align:center; color:var(--danger); margin-top:50px;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size:2rem; margin-bottom:10px;"></i>
+                        <p>Connection Failed</p>
+                        <p style="font-size:0.8rem; color:#777;">${error.message}</p>
+                        <p style="font-size:0.7rem; color:#777;">Check Console (F12) for CORS errors.</p>
+                    </div>
+                `;
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass-chart"></i> Analyze Quality';
+            }
+        }
+        // --- MODIFIED: CONTENT GEN MODULE (With Toggle) ---
+
+        function generatePostDesignsHTML() {
+            return `
+                 <div class="page-title">AI Content Gen</div>
+                 <div class="card">
+                    <div class="post-creator">
+                        <div class="post-input">
+                            <div class="card-title">Create New Content</div>
+                            <div>
+                                <label style="font-size:0.9rem; font-weight:600;">Post Topic / Caption Idea</label>
+                                <textarea id="post-topic-input" rows="4" placeholder="e.g. A professional LinkedIn post about our new partnership with digitivia..."></textarea>
+                            </div>
+                            <div>
+                                <label style="font-size:0.9rem; font-weight:600;">Image Style</label>
+                                <select id="post-style-select" class="btn-outline" style="width:100%; margin-top:5px;">
+                                    <option value="Professional/Corporate">Professional/Corporate</option>
+                                    <option value="Modern/Minimalist">Modern/Minimalist</option>
+                                    <option value="Vibrant/Creative">Vibrant/Creative</option>
+                                    <option value="3D Illustration">3D Illustration</option>
+                                </select>
+                            </div>
+                            <button id="btn-generate" class="btn-primary" style="justify-content:center; margin-top:10px;" onclick="triggerContentGen()">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Design
+                            </button>
+                        </div>
+                        
+                        <div class="post-preview">
+                            <div class="platform-switch">
+                                <div class="switch-btn ${state.socialPreviewMode === 'facebook' ? 'active fb-mode' : ''}" onclick="togglePreviewMode('facebook')">
+                                    <i class="fa-brands fa-facebook"></i> Facebook
+                                </div>
+                                <div class="switch-btn ${state.socialPreviewMode === 'linkedin' ? 'active li-mode' : ''}" onclick="togglePreviewMode('linkedin')">
+                                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                                </div>
+                            </div>
+
+                            <div id="post-preview-area" style="width:100%; display:flex; justify-content:center;">
+                                <div style="text-align:center; margin-top: 100px; color:#999;">
+                                    AI Generated Preview will appear here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+            `;
+        }
+
+        function togglePreviewMode(mode) {
+            state.socialPreviewMode = mode;
+            // Re-render the view wrapper (buttons update)
+            renderMainContent(); 
+        }
+
+        async function triggerContentGen() {
+            const topicInput = document.getElementById('post-topic-input');
+            const styleInput = document.getElementById('post-style-select');
+            const previewArea = document.getElementById('post-preview-area');
+            const generateBtn = document.getElementById('btn-generate');
+            
+            const topic = topicInput.value;
+            const style = styleInput.value;
+
+            if (!topic) {
+                alert("Please enter a topic or caption first.");
+                return;
+            }
+
+            // 1. Loading State
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
+            previewArea.innerHTML = `
+                <div style="text-align:center; color:var(--primary); margin-top: 100px;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:2rem; margin-bottom:10px;"></i>
+                    <p>AI is designing your content...</p>
+                </div>
+            `;
+
+            try {
+                // 2. Call Webhook
+                const response = await fetch('https://n8n.srv1174105.hstgr.cloud/webhook/content', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic: topic, style: style })
+                });
+
+                if (!response.ok) throw new Error(`Server Error`);
+                const data = await response.json();
+
+                // 3. Store Data for toggling
+                state.lastGeneratedContent = {
+                    image: data.image_url || data.output || data.image || "https://placehold.co/600x400?text=AI+Image+Generated",
+                    caption: data.generated_caption || data.caption || "Here is the content you requested."
+                };
+
+                // 4. Render
+                renderSocialPreview(state.lastGeneratedContent);
+
+            } catch (error) {
+                console.error(error);
+                previewArea.innerHTML = `<div style="text-align:center; margin-top:100px; color:var(--danger)">Failed to generate content.</div>`;
+            } finally {
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Design';
+            }
+        }
+
+        function renderSocialPreview(content) {
+            const previewArea = document.getElementById('post-preview-area');
+            if(!previewArea) return;
+
+            const isFB = state.socialPreviewMode === 'facebook';
+            const user = {
+                name: "Sarah Connor",
+                avatar: "https://ui-avatars.com/api/?name=Sarah+Connor&background=2980b9&color=fff",
+                headline: "HR Manager at LTS Ops"
+            };
+
+            let html = `
+                <div class="social-preview-card">
+                    <div class="social-header">
+                        <img src="${user.avatar}" class="social-avatar">
+                        <div class="social-meta">
+                            <h4>${user.name}</h4>
+                            ${isFB 
+                                ? `<p>Just now · <i class="fa-solid fa-earth-americas" style="font-size:10px;"></i></p>` 
+                                : `<p>${user.headline}</p><p style="font-size:10px;">Just now • <i class="fa-solid fa-earth-americas"></i></p>`
+                            }
+                        </div>
+                        ${!isFB ? `<div style="margin-left:auto; color:var(--primary); font-weight:600; font-size:14px;">+ Follow</div>` : `<div style="margin-left:auto; color:#65676b;"><i class="fa-solid fa-ellipsis"></i></div>`}
+                    </div>
+
+                    <div class="social-caption">
+                        ${content.caption.replace(/\n/g, '<br>')}
+                    </div>
+
+                    <img src="${content.image}" class="generated-img">
+
+                    <div class="social-footer">
+                        <div class="social-action"><i class="fa-regular fa-thumbs-up"></i> Like</div>
+                        <div class="social-action"><i class="fa-regular fa-comment"></i> Comment</div>
+                        ${isFB 
+                            ? `<div class="social-action"><i class="fa-solid fa-share"></i> Share</div>` 
+                            : `<div class="social-action"><i class="fa-solid fa-retweet"></i> Repost</div><div class="social-action"><i class="fa-regular fa-paper-plane"></i> Send</div>`
+                        }
+                    </div>
+                </div>
+            `;
+
+            previewArea.innerHTML = html;
+        }
+
+
+        // --- ORIGINAL DASHBOARD GENERATORS (Kept as is) ---
         function generateDigitalWorkforceHTML() {
             return `
                 <div class="page-title">
@@ -759,8 +1125,6 @@
                 </div>
             `;
         }
-
-        // --- UPDATED VIEW GENERATORS ---
 
         function generateDashboardHTML() {
             const t = i18n[state.lang];
@@ -874,7 +1238,7 @@
                              </div>
                              <button class="btn-outline" onclick="state.activeView = 'digitalWorkforce'; renderSidebar(); renderMainContent();" style="border-color:var(--info); color:var(--info);">
                                 Configure Agents
-                            </button>
+                             </button>
                         </div>
                     </div>
                 </div>
@@ -1177,146 +1541,6 @@
                 </div>
             `;
         }
-
-        function generatePostDesignsHTML() {
-            return `
-                 <div class="page-title">AI Content Gen</div>
-                 <div class="card">
-                    <div class="post-creator">
-                        <div class="post-input">
-                            <div class="card-title">Create New Content</div>
-                            <div>
-                                <label style="font-size:0.9rem; font-weight:600;">Post Topic / Caption Idea</label>
-                                <textarea id="post-topic-input" rows="4" placeholder="e.g. A professional LinkedIn post about our new partnership with digitivia..."></textarea>
-                            </div>
-                            <div>
-                                <label style="font-size:0.9rem; font-weight:600;">Image Style</label>
-                                <select id="post-style-select" class="btn-outline" style="width:100%; margin-top:5px;">
-                                    <option value="Professional/Corporate">Professional/Corporate</option>
-                                    <option value="Modern/Minimalist">Modern/Minimalist</option>
-                                    <option value="Vibrant/Creative">Vibrant/Creative</option>
-                                    <option value="3D Illustration">3D Illustration</option>
-                                </select>
-                            </div>
-                            <button id="btn-generate" class="btn-primary" style="justify-content:center; margin-top:10px;" onclick="triggerContentGen()">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> Generate Design
-                            </button>
-                        </div>
-                        <div class="post-preview" id="post-preview-area">
-                            <div style="text-align:center; margin-top: auto; margin-bottom: auto;">
-                                <span style="color:#999;">AI Generated Preview will appear here</span>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                 
-                 <div class="dashboard-grid grid-3" style="margin-top:20px;">
-                    <div class="card" style="padding:10px;">
-                        <div style="height:150px; background:#e0e0e0; border-radius:4px; margin-bottom:10px;"></div>
-                        <div style="font-weight:600; font-size:0.9rem;">Hiring Alert Post</div>
-                        <div style="font-size:0.8rem; color:var(--primary); cursor:pointer;">View Insights</div>
-                    </div>
-                    <div class="card" style="padding:10px;">
-                        <div style="height:150px; background:#e0e0e0; border-radius:4px; margin-bottom:10px;"></div>
-                        <div style="font-weight:600; font-size:0.9rem;">Eid Greeting</div>
-                         <div style="font-size:0.8rem; color:var(--primary); cursor:pointer;">View Insights</div>
-                    </div>
-                 </div>
-            `;
-        }
-
-        async function triggerContentGen() {
-            const topicInput = document.getElementById('post-topic-input');
-            const styleInput = document.getElementById('post-style-select');
-            const previewArea = document.getElementById('post-preview-area');
-            const generateBtn = document.getElementById('btn-generate');
-            
-            const topic = topicInput.value;
-            const style = styleInput.value;
-
-            if (!topic) {
-                alert("Please enter a topic or caption first.");
-                return;
-            }
-
-            // 1. Show Loading State
-            generateBtn.disabled = true;
-            generateBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating...';
-            previewArea.innerHTML = `
-                <div style="text-align:center; color:var(--primary); margin-top: auto; margin-bottom: auto;">
-                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size:2rem; margin-bottom:10px;"></i>
-                    <p>AI is designing your content...</p>
-                </div>
-            `;
-
-            try {
-                // 2. Call the n8n Webhook
-                const response = await fetch('https://n8n.srv1174105.hstgr.cloud/webhook/content', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        topic: topic,
-                        style: style
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Server Error: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                // 3. Handle Response
-                const imageUrl = data.image_url || data.output || data.image; 
-                const captionText = data.generated_caption || data.caption || "No caption generated.";
-
-                let contentHtml = '';
-
-                // Build Image Section
-                if (imageUrl) {
-                    contentHtml += `
-                        <div style="position:relative; width:100%; text-align:center;">
-                            <img src="${imageUrl}" class="generated-img" alt="AI Generated Content">
-                            <div class="ai-badge"><i class="fa-solid fa-robot"></i> AI Image</div>
-                        </div>
-                    `;
-                }
-
-                // Build Caption Section
-                if (captionText) {
-                    contentHtml += `
-                        <div class="caption-box">
-                            <div style="font-weight:600; margin-bottom:5px; color:var(--primary);">
-                                <i class="fa-solid fa-pen-nib"></i> Suggested Caption:
-                            </div>
-                            <p>${captionText.replace(/\n/g, '<br>')}</p>
-                        </div>
-                        <div style="width:100%; text-align:right; margin-top:10px;">
-                             <a href="${imageUrl}" target="_blank" class="btn-primary" style="padding:4px 8px; font-size:0.7rem;">Download Asset</a>
-                        </div>
-                    `;
-                }
-
-                previewArea.innerHTML = contentHtml;
-
-            } catch (error) {
-                console.error('Error:', error);
-                previewArea.innerHTML = `
-                    <div style="text-align:center; color:var(--danger); margin-top: auto; margin-bottom: auto;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size:2rem; margin-bottom:10px;"></i>
-                        <p>Failed to generate content.</p>
-                        <p style="font-size:0.7rem;">Check console for details.</p>
-                    </div>
-                `;
-            } finally {
-                // 4. Reset Button
-                generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Generate Design';
-            }
-        }
-
 
         function generateWFMHTML() {
             return `
